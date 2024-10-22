@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace minecraftWorldManager
 {
-    internal class WorldDataFile
+    public class WorldDataFile
     {
 
 
@@ -18,11 +18,11 @@ namespace minecraftWorldManager
 
         }
 
-        private string worldVersion;
-        private string minecraftVersion;
-        private DateTime marked;
-      
-        private DateTime saveDate;
+        public string worldVersion;
+        public string minecraftVersion;
+        public DateTime marked;
+
+        public DateTime saveDate;
 
        
 

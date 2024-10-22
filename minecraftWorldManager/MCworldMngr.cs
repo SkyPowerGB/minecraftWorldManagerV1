@@ -14,6 +14,8 @@ namespace minecraftWorldManager
 {
     public partial class MCworldMngr : Form
     {
+
+        
         public MCworldMngr()
         {
             InitializeComponent();
@@ -93,6 +95,34 @@ namespace minecraftWorldManager
             if (dataFile == null) { return; }
             tbBackupsPath.Text = dataFile.backupsPath;
             tbQbackupsLocPath.Text = dataFile.quickBackupsPath;
+            lbQuickBackups.Items.Clear();
+            lbBackups.Items.Clear();
+
+            var backupsDirs = Directory.GetDirectories(tbBackupsPath.Text);
+
+            var qBackupsDirs = Directory.GetDirectories(tbQbackupsLocPath.Text);
+
+            foreach (String dir in backupsDirs) {
+                if (WorldDataFileWorker.IsMarked(dir)||WorldDataFileWorker.IsBranch(dir)){
+               string name= Path.GetFileName(dir);
+                    lbBackups.Items.Add(name);
+                
+                }
+            
+            }
+
+            foreach (String dir in qBackupsDirs)
+            {
+                 string name = Path.GetFileName(dir);
+                    lbQuickBackups.Items.Add(name);
+
+                
+
+            }
+
+
+
+
         }
 
         private void btnSelectBackups_Click(object sender, EventArgs e)
@@ -113,6 +143,7 @@ namespace minecraftWorldManager
 
                 }
                 ProgDataFileMngr.UpdateProgData(data);
+                LoadBackups();
 
                 return;
             }
@@ -155,7 +186,7 @@ namespace minecraftWorldManager
 
                 ProgDataFileMngr.UpdateProgData(data);
 
-
+                LoadBackups();
             }
 
 
@@ -167,6 +198,84 @@ namespace minecraftWorldManager
 
 
             return;
+        }
+
+        private void btnOpenMarkForm_Click(object sender, EventArgs e)
+        {
+            if (lbMcWorlds.SelectedItem == null) {
+                showErrorMsg("World not selected!");
+                return;
+            }
+           string selectedWorld=lbMcWorlds.SelectedItem.ToString();
+            string worldPath = Path.Combine(tbMcSavesLocPath.Text, selectedWorld);
+          
+            
+
+            WFeditor wFeditor = new WFeditor(worldPath);
+          
+           var file= WorldDataFileWorker.GetWroldDF(worldPath);
+            
+            wFeditor.ShowDialog();
+            if (wFeditor.WorldDataFile != null)
+            {
+                WorldDataFileWorker.MarkWorld(worldPath, wFeditor.WorldDataFile);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showErrorMsg(String error) {
+            MessageBox.Show(error);
+        }
+
+        private void lbBackups_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+          
+          
+        
+        
+        }
+
+
+        private void ShowWorldData(string worldPath) {
+            rTbDisplayWFdata.Clear();
+
+            bool isbranch = WorldDataFileWorker.IsBranch(worldPath);
+            if (!WorldDataFileWorker.IsMarked(worldPath)&&!isbranch )
+            {
+
+                rTbDisplayWFdata.Text += "NOT MARKED";
+                return;
+            }
+
+            if (isbranch)
+            {
+            }
+            else
+            {
+                var file = WorldDataFileWorker.GetWroldDF(worldPath);
+                rTbDisplayWFdata.Text += "Date marked version:" + file.marked;
+                rTbDisplayWFdata.Text += Environment.NewLine;
+                rTbDisplayWFdata.Text += "Minecraft version:" + file.minecraftVersion;
+                rTbDisplayWFdata.Text += Environment.NewLine;
+
+                rTbDisplayWFdata.Text += "World version:" + file.worldVersion;
+            }
+
+
+
+        }
+
+        private void lbMcWorlds_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          
+            if (lbMcWorlds.SelectedItem == null) { return; }
+            if (lbMcWorlds.SelectedItem.ToString() == null|| tbMcSavesLocPath.Text==null) { return; }
+            ShowWorldData(Path.Combine(tbMcSavesLocPath.Text,lbMcWorlds.SelectedItem.ToString()));
         }
     }
 }

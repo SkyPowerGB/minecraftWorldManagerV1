@@ -28,27 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tbWorldVersion = new System.Windows.Forms.TextBox();
+            this.cbMcVersion = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnMark = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // tbWorldVersion
             // 
-            this.textBox1.Location = new System.Drawing.Point(28, 47);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(207, 20);
-            this.textBox1.TabIndex = 0;
+            this.tbWorldVersion.Location = new System.Drawing.Point(28, 47);
+            this.tbWorldVersion.Name = "tbWorldVersion";
+            this.tbWorldVersion.Size = new System.Drawing.Size(207, 20);
+            this.tbWorldVersion.TabIndex = 0;
             // 
-            // comboBox1
+            // cbMcVersion
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(28, 126);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(207, 21);
-            this.comboBox1.TabIndex = 1;
+            this.cbMcVersion.FormattingEnabled = true;
+            this.cbMcVersion.Items.AddRange(new object[] {
+            "1.1.0",
+            "1.2.5",
+            "1.4.7",
+            "1.7.10",
+            "1.8",
+            "1.9",
+            "1.20",
+            "1.21.1"});
+            this.cbMcVersion.Location = new System.Drawing.Point(28, 126);
+            this.cbMcVersion.Name = "cbMcVersion";
+            this.cbMcVersion.Size = new System.Drawing.Size(207, 21);
+            this.cbMcVersion.TabIndex = 1;
             // 
             // label1
             // 
@@ -76,8 +85,9 @@
             this.btnMark.TabIndex = 4;
             this.btnMark.Text = "Mark ";
             this.btnMark.UseVisualStyleBackColor = true;
+            this.btnMark.Click += new System.EventHandler(this.btnMark_Click);
             // 
-            // Form2
+            // WFeditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -85,10 +95,11 @@
             this.Controls.Add(this.btnMark);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Controls.Add(this.cbMcVersion);
+            this.Controls.Add(this.tbWorldVersion);
+            this.Name = "WFeditor";
+            this.Text = "WF editor";
+            this.Load += new System.EventHandler(this.WFeditor_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,8 +107,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox tbWorldVersion;
+        private System.Windows.Forms.ComboBox cbMcVersion;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnMark;
