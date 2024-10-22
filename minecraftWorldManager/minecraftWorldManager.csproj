@@ -62,6 +62,7 @@
     <Compile Include="MCworldMngr.Designer.cs">
       <DependentUpon>MCworldMngr.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProgDataFileMngr.cs" />
     <Compile Include="ProgramDat.cs" />
     <Compile Include="WFeditor.cs">
       <SubType>Form</SubType>
@@ -106,6 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

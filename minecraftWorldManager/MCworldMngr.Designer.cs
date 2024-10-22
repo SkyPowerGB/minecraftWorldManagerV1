@@ -31,7 +31,7 @@
             this.lbMcWorlds = new System.Windows.Forms.ListBox();
             this.lbBackups = new System.Windows.Forms.ListBox();
             this.btnLoadSaves = new System.Windows.Forms.Button();
-            this.tbSavesPath = new System.Windows.Forms.TextBox();
+            this.tbBackupsPath = new System.Windows.Forms.TextBox();
             this.tbMcSavesLocPath = new System.Windows.Forms.TextBox();
             this.btnSelectSavesFold = new System.Windows.Forms.Button();
             this.btnSelectBackups = new System.Windows.Forms.Button();
@@ -57,6 +57,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.btnSelectQbackupFolder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbMcWorlds
@@ -85,12 +86,12 @@
             this.btnLoadSaves.UseVisualStyleBackColor = true;
             this.btnLoadSaves.Click += new System.EventHandler(this.btnLoadSaves_Click);
             // 
-            // tbSavesPath
+            // tbBackupsPath
             // 
-            this.tbSavesPath.Location = new System.Drawing.Point(351, 89);
-            this.tbSavesPath.Name = "tbSavesPath";
-            this.tbSavesPath.Size = new System.Drawing.Size(241, 20);
-            this.tbSavesPath.TabIndex = 7;
+            this.tbBackupsPath.Location = new System.Drawing.Point(351, 89);
+            this.tbBackupsPath.Name = "tbBackupsPath";
+            this.tbBackupsPath.Size = new System.Drawing.Size(241, 20);
+            this.tbBackupsPath.TabIndex = 7;
             // 
             // tbMcSavesLocPath
             // 
@@ -116,6 +117,7 @@
             this.btnSelectBackups.TabIndex = 31;
             this.btnSelectBackups.Text = "Open";
             this.btnSelectBackups.UseVisualStyleBackColor = true;
+            this.btnSelectBackups.Click += new System.EventHandler(this.btnSelectBackups_Click);
             // 
             // btnCutSavesToBackups
             // 
@@ -210,8 +212,9 @@
             // 
             this.tbQbackupsLocPath.Location = new System.Drawing.Point(12, 625);
             this.tbQbackupsLocPath.Name = "tbQbackupsLocPath";
-            this.tbQbackupsLocPath.Size = new System.Drawing.Size(286, 20);
+            this.tbQbackupsLocPath.Size = new System.Drawing.Size(233, 20);
             this.tbQbackupsLocPath.TabIndex = 51;
+      
             // 
             // rTbDisplayWFdata
             // 
@@ -312,11 +315,22 @@
             this.button9.Text = "Delete";
             this.button9.UseVisualStyleBackColor = true;
             // 
+            // btnSelectQbackupFolder
+            // 
+            this.btnSelectQbackupFolder.Location = new System.Drawing.Point(251, 625);
+            this.btnSelectQbackupFolder.Name = "btnSelectQbackupFolder";
+            this.btnSelectQbackupFolder.Size = new System.Drawing.Size(47, 20);
+            this.btnSelectQbackupFolder.TabIndex = 64;
+            this.btnSelectQbackupFolder.Text = "Open";
+            this.btnSelectQbackupFolder.UseVisualStyleBackColor = true;
+            this.btnSelectQbackupFolder.Click += new System.EventHandler(this.btnSelectQbackupFolder_Click);
+            // 
             // MCworldMngr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 772);
+            this.Controls.Add(this.btnSelectQbackupFolder);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -342,12 +356,13 @@
             this.Controls.Add(this.btnSelectBackups);
             this.Controls.Add(this.btnSelectSavesFold);
             this.Controls.Add(this.tbMcSavesLocPath);
-            this.Controls.Add(this.tbSavesPath);
+            this.Controls.Add(this.tbBackupsPath);
             this.Controls.Add(this.btnLoadSaves);
             this.Controls.Add(this.lbBackups);
             this.Controls.Add(this.lbMcWorlds);
             this.Name = "MCworldMngr";
             this.Text = "Minecraft world Manager";
+            this.Load += new System.EventHandler(this.MCworldMngr_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,7 +373,7 @@
         private System.Windows.Forms.ListBox lbMcWorlds;
         private System.Windows.Forms.ListBox lbBackups;
         private System.Windows.Forms.Button btnLoadSaves;
-        private System.Windows.Forms.TextBox tbSavesPath;
+        private System.Windows.Forms.TextBox tbBackupsPath;
         private System.Windows.Forms.TextBox tbMcSavesLocPath;
         private System.Windows.Forms.Button btnSelectSavesFold;
         private System.Windows.Forms.Button btnSelectBackups;
@@ -384,6 +399,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button btnSelectQbackupFolder;
     }
 }
 
