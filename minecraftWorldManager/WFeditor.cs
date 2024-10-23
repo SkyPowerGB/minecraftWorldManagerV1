@@ -13,11 +13,13 @@ namespace minecraftWorldManager
     public partial class WFeditor : Form
     {
         public WorldDataFile WorldDataFile { get; set; }
+        public DialogResult result = DialogResult.Cancel;
         public WFeditor()
         {
             InitializeComponent();
             loadData();
             this.StartPosition = FormStartPosition.CenterScreen;
+            WorldDataFile = new WorldDataFile();
 
         }
         public WFeditor(WorldDataFile WorldDataFile)
@@ -55,6 +57,7 @@ namespace minecraftWorldManager
         private void btnMark_Click(object sender, EventArgs e)
         {
             WorldDataFile = new WorldDataFile(tbWorldVersion.Text,cbMcVersion.Text);
+            result= DialogResult.OK;    
             this.Close();
         }
 

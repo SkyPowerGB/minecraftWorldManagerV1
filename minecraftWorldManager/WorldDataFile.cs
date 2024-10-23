@@ -9,7 +9,7 @@ namespace minecraftWorldManager
     public class WorldDataFile
     {
 
-
+        public WorldDataFile() { }
         public WorldDataFile(string minecraftVersion, string worldVersion)
         {
             this.worldVersion = minecraftVersion;

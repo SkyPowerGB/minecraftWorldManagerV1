@@ -28,6 +28,7 @@ namespace minecraftWorldManager
             LoadSaves();
             LoadBackups();  
             LoadQsaves();
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -163,9 +164,9 @@ namespace minecraftWorldManager
           var path=  tbQbackupsLocPath.Text;
             if(path == null) { return; }
             var dirs=Directory.GetDirectories(path);
-            foreach (string dir in dirs) { 
-               
-                lbQuickBackups.Text = Path.GetFileName(dir);
+            foreach (string dir in dirs) {
+
+                lbQuickBackups.Items.Add(Path.GetFileName(dir));
             
             }
         }
@@ -307,17 +308,23 @@ namespace minecraftWorldManager
 
         private void lbBackups_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+         
+
             tbBranch.Clear();
-            var backup = lbBackups.SelectedItem;
-            if (backup== null) {
+            
+            if (!isBackupSelected()) {
                 return;
             
             
-            
+    
             }
-            var backupPath=Path.Combine(tbBackupsPath.Text,backup.ToString());
-            if (!WorldDataFileWorker.IsBranch(backupPath)) { return; }
 
+            var backupPath= getSelectedBackupPath();
+            var worldDataFile = WorldDataFileWorker.GetWroldDF(backupPath);
+            displayWorldData(worldDataFile);
+            if (!WorldDataFileWorker.IsBranch(backupPath)) { return; }
+            displayWorldData(worldDataFile);
             var dirs=Directory.GetDirectories(backupPath);
             lbBranchContents.Items.Clear();
             tbBranch.Text = backupPath;
@@ -362,10 +369,13 @@ namespace minecraftWorldManager
 
         private void lbMcWorlds_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+            
             if (lbMcWorlds.SelectedItem == null) { return; }
             if (lbMcWorlds.SelectedItem.ToString() == null|| tbMcSavesLocPath.Text==null) { return; }
-            ShowWorldData(Path.Combine(tbMcSavesLocPath.Text,lbMcWorlds.SelectedItem.ToString()));
+          
+            displayWorldData(WorldDataFileWorker.GetWroldDF(Path.Combine(tbMcSavesLocPath.Text, lbMcWorlds.SelectedItem.ToString())));
+
+
         }
 
         private void btnCutSavesToBackups_Click(object sender, EventArgs e)
@@ -532,11 +542,11 @@ namespace minecraftWorldManager
         {
             var item=lbBranchContents.SelectedItem;
             var path = tbBranch.Text;
-            if (item == null && path == null ) {
+            if (item == null || path == null ) {
 
                 return;
             }
-       
+           
              
             ConfirmDelete(Path.Combine(path, item.ToString()));
             lbBranchContents.Items.Clear();
@@ -661,5 +671,115 @@ namespace minecraftWorldManager
             ConfirmDelete(fileToDelete);
             refreshLists();
         }
+       
+        private void button13_Click(object sender, EventArgs e)
+        {
+           var selectedBackup=lbBackups.SelectedItem;
+            if (selectedBackup == null) { return; }
+            InputForm rename= new InputForm();
+            rename.ShowDialog();
+            if (rename.GetResult() == DialogResult.OK) {
+                McFileMngr.RenameWorld(tbBackupsPath.Text, 
+                    Path.Combine(tbBackupsPath.Text,selectedBackup.ToString()),rename.GetInput());
+                refreshLists();
+            }
+        }
+
+        private void lbQuickBackups_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isQBackupSelected()) {return; }
+            displayQbckpWorldsNames(getSelectedQBackupPath());
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            var selectedBackup = lbBranchContents.SelectedItem;
+            if (selectedBackup == null) { return; }
+            InputForm rename = new InputForm();
+            rename.ShowDialog();
+            if (rename.GetResult() == DialogResult.OK)
+            {
+                string branchPath = tbBranch.Text;
+                string name = rename.GetInput();
+                DateTimeOffset offset = DateTimeOffset.Now;
+                name += " D" + offset.ToUnixTimeSeconds();
+                McFileMngr.RenameWorld(branchPath,
+                    Path.Combine(branchPath, selectedBackup.ToString()), name);
+                refreshLists();
+            }
+
+        }
+
+        private void btnEditMark_Click(object sender, EventArgs e)
+        {
+            var selectedBackup=lbBackups.SelectedItem;
+            var backupsPath=tbBackupsPath.Text;
+            if (selectedBackup == null || backupsPath == null) { return; }
+           var backupWorldPath= Path.Combine(backupsPath, selectedBackup.ToString());
+            if (!WorldDataFileWorker.IsMarked(backupWorldPath)) { return; }
+           WorldDataFile worldDf= WorldDataFileWorker.GetWroldDF(backupWorldPath);
+
+            WFeditor editor=new WFeditor(worldDf);
+            editor.ShowDialog();
+            if (editor.result == DialogResult.OK) {
+
+                WorldDataFileWorker.MarkWorld(backupWorldPath,editor.WorldDataFile);
+            
+            }
+           
+
+           
+        }
+
+
+        private void displayWorldData(WorldDataFile df) {
+            if(df == null) { return; }
+            rTbDisplayWFdata.Clear();
+            rTbDisplayWFdata.Text += "Last edited:  " + df.marked + Environment.NewLine;
+            rTbDisplayWFdata.Text += Environment.NewLine;
+            rTbDisplayWFdata.Text += "World Version:  " + df.minecraftVersion + Environment.NewLine;
+            rTbDisplayWFdata.Text += Environment.NewLine;
+            rTbDisplayWFdata.Text += "Minecraft version:  " + df.worldVersion + Environment.NewLine; 
+
+        }
+
+        private void displayQbckpWorldsNames(string selectedQB) {
+            rTbDisplayWFdata.Clear();
+          var dirs= Directory.GetDirectories(selectedQB);
+            foreach (var dir in dirs) {
+                rTbDisplayWFdata.Text += Path.GetFileName(dir)+Environment.NewLine;
+                rTbDisplayWFdata.Text += Environment.NewLine;
+            }
+        }
+
+
+        public bool isBackupSelected() {
+            if (lbBackups.SelectedItem == null) { return false; }return true; }
+        public bool isQBackupSelected() { 
+            if (lbQuickBackups.SelectedItem == null) { return false; } return true; }
+        public bool isSaveSelected() {
+            
+            if (lbMcWorlds.SelectedItem == null) {
+                return false; } return true; }
+
+        public string getSelectedBackupPath() {
+            if (lbBackups.SelectedItem == null) { return null; }
+            return Path.Combine(tbBackupsPath.Text, lbBackups.SelectedItem.ToString());
+        }
+        public string getSelectedQBackupPath()
+        {
+            if (lbQuickBackups.SelectedItem == null) { return null; }
+            return Path.Combine(tbQbackupsLocPath.Text, lbQuickBackups.SelectedItem.ToString());
+        }
+        public string getSelectedSavePath()
+        {
+            if (lbMcWorlds.SelectedItem == null) { return null; }
+            return Path.Combine(tbMcSavesLocPath.Text, lbMcWorlds.SelectedItem.ToString());
+        }
+
+
+
     }
+
+
 }

@@ -189,6 +189,7 @@
             this.lbQuickBackups.ScrollAlwaysVisible = true;
             this.lbQuickBackups.Size = new System.Drawing.Size(286, 199);
             this.lbQuickBackups.TabIndex = 50;
+            this.lbQuickBackups.SelectedIndexChanged += new System.EventHandler(this.lbQuickBackups_SelectedIndexChanged);
             // 
             // tbQbackupsLocPath
             // 
@@ -202,7 +203,6 @@
             this.rTbDisplayWFdata.Cursor = System.Windows.Forms.Cursors.Help;
             this.rTbDisplayWFdata.Location = new System.Drawing.Point(363, 409);
             this.rTbDisplayWFdata.Name = "rTbDisplayWFdata";
-            this.rTbDisplayWFdata.ReadOnly = true;
             this.rTbDisplayWFdata.Size = new System.Drawing.Size(282, 176);
             this.rTbDisplayWFdata.TabIndex = 52;
             this.rTbDisplayWFdata.Text = "";
@@ -318,12 +318,13 @@
             // 
             // btnEditMark
             // 
-            this.btnEditMark.Location = new System.Drawing.Point(452, 12);
+            this.btnEditMark.Location = new System.Drawing.Point(448, 12);
             this.btnEditMark.Name = "btnEditMark";
             this.btnEditMark.Size = new System.Drawing.Size(95, 40);
             this.btnEditMark.TabIndex = 39;
             this.btnEditMark.Text = "WF editor";
             this.btnEditMark.UseVisualStyleBackColor = true;
+            this.btnEditMark.Click += new System.EventHandler(this.btnEditMark_Click);
             // 
             // btnSelectSavesFold
             // 
@@ -388,6 +389,7 @@
             this.button13.TabIndex = 71;
             this.button13.Text = "Rename";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
@@ -397,6 +399,7 @@
             this.button14.TabIndex = 72;
             this.button14.Text = "Rename";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button6
             // 
