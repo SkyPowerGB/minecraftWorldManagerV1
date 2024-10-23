@@ -23,6 +23,11 @@ namespace minecraftWorldManager
             LoadBackups();
         }
 
+        private void refreshLists() {
+            LoadSaves();
+            LoadBackups();  
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
 
@@ -208,23 +213,40 @@ namespace minecraftWorldManager
             }
            string selectedWorld=lbMcWorlds.SelectedItem.ToString();
             string worldPath = Path.Combine(tbMcSavesLocPath.Text, selectedWorld);
-          
-            
 
-            WFeditor wFeditor = new WFeditor(worldPath);
-          
-           var file= WorldDataFileWorker.GetWroldDF(worldPath);
+
+
+            WFeditor wFeditor;
+
+
+            if (WorldDataFileWorker.IsMarked(worldPath)) {
+                wFeditor = new WFeditor(WorldDataFileWorker.GetWroldDF(worldPath));
+            }
+            else
+            {
+                wFeditor = new WFeditor(worldPath);
+            }
+
+            var file= WorldDataFileWorker.GetWroldDF(worldPath);
+
+
             
             wFeditor.ShowDialog();
             if (wFeditor.WorldDataFile != null)
             {
-                WorldDataFileWorker.MarkWorld(worldPath, wFeditor.WorldDataFile);
+              
+                    WorldDataFileWorker.MarkWorld(worldPath, wFeditor.WorldDataFile);
+                
+              
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var item = lbMcWorlds.SelectedItem;
 
+            if (item != null) { 
+            }
         }
 
         private void showErrorMsg(String error) {
@@ -233,11 +255,14 @@ namespace minecraftWorldManager
 
         private void lbBackups_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-          
-          
-        
-        
+            if (lbMcWorlds.SelectedIndex != -1)
+            {
+                lbMcWorlds.ClearSelected();
+            }
+
+
+
+
         }
 
 
@@ -272,10 +297,93 @@ namespace minecraftWorldManager
 
         private void lbMcWorlds_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+            if (lbBackups.SelectedIndex != -1)
+            {
+                lbBackups.ClearSelected();
+            }
             if (lbMcWorlds.SelectedItem == null) { return; }
             if (lbMcWorlds.SelectedItem.ToString() == null|| tbMcSavesLocPath.Text==null) { return; }
             ShowWorldData(Path.Combine(tbMcSavesLocPath.Text,lbMcWorlds.SelectedItem.ToString()));
         }
+
+        private void btnCutSavesToBackups_Click(object sender, EventArgs e)
+        {
+            var save = lbMcWorlds.SelectedItem;
+            if (save == null) { return; }
+            
+
+            string worldPath = Path.Combine(tbMcSavesLocPath.Text,save.ToString());
+            if (!WorldDataFileWorker.IsMarked(worldPath)) {
+                showErrorMsg("File not marked");
+                return; }
+
+            string targetPath = Path.Combine(tbBackupsPath.Text, save.ToString());
+                
+                
+
+            McFileMngr.CutWorldTo(worldPath,targetPath);
+
+            LoadBackups();
+            LoadSaves();
+
+        }
+
+        private void btnCutBckpToSaves_Click(object sender, EventArgs e)
+        {
+            var save = lbBackups.SelectedItem;
+            if (save == null) { return; }
+
+
+            string worldPath = Path.Combine(tbBackupsPath.Text, save.ToString());
+          
+          
+
+            string targetPath = Path.Combine(tbMcSavesLocPath.Text, save.ToString());
+            McFileMngr.CutWorldTo(worldPath, targetPath);
+            LoadSaves();
+            LoadBackups();
+
+
+        }
+
+        private void btnCopyBckpToSaves_Click(object sender, EventArgs e)
+        {
+            var worldToCopy = lbBackups.SelectedItem;
+            if(worldToCopy == null) { return; };
+            var savesPath=tbMcSavesLocPath.Text;
+            var worldPath=Path.Combine(tbBackupsPath.Text,worldToCopy.ToString());
+            McFileMngr.CopyWorldTo(worldPath,savesPath);
+            refreshLists();
+        }
+
+        private void btnCopySavesToBackup_Click(object sender, EventArgs e)
+        {
+            
+            var worldToCopy = lbMcWorlds.SelectedItem;
+            if (worldToCopy == null) { return; };
+            var backupsPath = tbBackupsPath.Text;
+            var worldPath = Path.Combine(tbMcSavesLocPath.Text, worldToCopy.ToString());
+            if (!WorldDataFileWorker.IsMarked(worldPath)) { showErrorMsg("World isnt MARKED!"); return; } 
+            McFileMngr.CopyWorldTo(worldPath, backupsPath);
+            refreshLists();
+        }
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+            var world = lbMcWorlds.SelectedItem;
+            if (world == null) { return; }
+
+            ConfirmDelete(Path.Combine(tbMcSavesLocPath.Text,world.ToString()));
+        }
+        private void ConfirmDelete(string worldPath) {
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this world?", "Confirm DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                Directory.Delete(worldPath,true);
+                refreshLists();
+            }
+             
+        }
+
     }
 }

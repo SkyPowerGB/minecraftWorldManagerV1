@@ -121,6 +121,7 @@
             this.btnCutSavesToBackups.TabIndex = 32;
             this.btnCutSavesToBackups.Text = ">";
             this.btnCutSavesToBackups.UseVisualStyleBackColor = true;
+            this.btnCutSavesToBackups.Click += new System.EventHandler(this.btnCutSavesToBackups_Click);
             // 
             // btnCutBckpToSaves
             // 
@@ -130,6 +131,7 @@
             this.btnCutBckpToSaves.TabIndex = 33;
             this.btnCutBckpToSaves.Text = "<";
             this.btnCutBckpToSaves.UseVisualStyleBackColor = true;
+            this.btnCutBckpToSaves.Click += new System.EventHandler(this.btnCutBckpToSaves_Click);
             // 
             // btnCopyBckpToSaves
             // 
@@ -139,6 +141,7 @@
             this.btnCopyBckpToSaves.TabIndex = 34;
             this.btnCopyBckpToSaves.Text = "<<";
             this.btnCopyBckpToSaves.UseVisualStyleBackColor = true;
+            this.btnCopyBckpToSaves.Click += new System.EventHandler(this.btnCopyBckpToSaves_Click);
             // 
             // btnCopySavesToBackup
             // 
@@ -148,6 +151,7 @@
             this.btnCopySavesToBackup.TabIndex = 35;
             this.btnCopySavesToBackup.Text = ">>";
             this.btnCopySavesToBackup.UseVisualStyleBackColor = true;
+            this.btnCopySavesToBackup.Click += new System.EventHandler(this.btnCopySavesToBackup_Click);
             // 
             // btnOpenMarkForm
             // 
@@ -199,7 +203,7 @@
             this.rTbDisplayWFdata.Location = new System.Drawing.Point(363, 409);
             this.rTbDisplayWFdata.Name = "rTbDisplayWFdata";
             this.rTbDisplayWFdata.ReadOnly = true;
-            this.rTbDisplayWFdata.Size = new System.Drawing.Size(432, 262);
+            this.rTbDisplayWFdata.Size = new System.Drawing.Size(282, 351);
             this.rTbDisplayWFdata.TabIndex = 52;
             this.rTbDisplayWFdata.Text = "";
             // 
@@ -275,6 +279,7 @@
             this.button7.TabIndex = 61;
             this.button7.Text = "Delete";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click_1);
             // 
             // button8
             // 

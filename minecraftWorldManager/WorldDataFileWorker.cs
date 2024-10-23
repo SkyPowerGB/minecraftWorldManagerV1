@@ -16,16 +16,17 @@ namespace minecraftWorldManager
        static private string fileName = "WorldDataFile.json";
        static private string branchName = "BranchFlag.json";
 
-
+        private static string GetWorldDFfilePath(string worldPath) { return Path.Combine(worldPath, fileName); }
         public static void MarkWorld(String worldPath,WorldDataFile file) {
+            if (IsMarked(worldPath)) { UpdateWorldDF(file, worldPath); return; }
             MarkWorld(worldPath, file.minecraftVersion, file.worldVersion);
         }
         public static void MarkWorld(String worldPath,String mCversion,String worldVersion ) {
             if (IsMarked(worldPath)) { return; }
             WorldDataFile file = new WorldDataFile(mCversion,worldVersion);
-
+            file.saveDate = DateTime.Now;
             String filePath=Path.Combine(worldPath,fileName);
-
+             
             String json=JsonConvert.SerializeObject(file,Formatting.Indented);
             File.WriteAllText(filePath, json);
 
@@ -75,11 +76,13 @@ namespace minecraftWorldManager
      
         }
 
-        public static void UpdateWorldDF(WorldDataFile worldDataFile, string path)
+        public static void UpdateWorldDF(WorldDataFile worldDataFile, string worldPath)
         {
-
+           string filePath=GetWorldDFfilePath(worldPath);
+          
+              worldDataFile.saveDate = DateTime.Now;
             string updatedJson = JsonConvert.SerializeObject(worldDataFile, Formatting.Indented);
-            File.WriteAllText(path, updatedJson);
+            File.WriteAllText(filePath, updatedJson);
         }
         
 
