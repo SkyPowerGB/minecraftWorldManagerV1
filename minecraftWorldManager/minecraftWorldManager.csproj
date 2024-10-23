@@ -56,6 +56,12 @@
     <Compile Include="CopyError.Designer.cs">
       <DependentUpon>CopyError.cs</DependentUpon>
     </Compile>
+    <Compile Include="InputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputDialog.Designer.cs">
+      <DependentUpon>InputDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="MCworldMngr.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,8 @@
     </Compile>
     <Compile Include="ProgDataFileMngr.cs" />
     <Compile Include="ProgramDat.cs" />
+    <Compile Include="QbckpFileMngr.cs" />
+    <Compile Include="QuickBackupsDat.cs" />
     <Compile Include="WFeditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +85,9 @@
     <Compile Include="WorldDataFileWorker.cs" />
     <EmbeddedResource Include="CopyError.resx">
       <DependentUpon>CopyError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputDialog.resx">
+      <DependentUpon>InputDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MCworldMngr.resx">
       <DependentUpon>MCworldMngr.cs</DependentUpon>
@@ -108,8 +119,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -165,6 +165,7 @@
             this.Controls.Add(this.rtbWorld1DatF);
             this.Name = "CopyError";
             this.Text = "CopyError";
+            this.Load += new System.EventHandler(this.CopyError_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

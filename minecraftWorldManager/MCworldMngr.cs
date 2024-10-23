@@ -21,11 +21,13 @@ namespace minecraftWorldManager
             InitializeComponent();
             LoadSaves();
             LoadBackups();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void refreshLists() {
             LoadSaves();
             LoadBackups();  
+            LoadQsaves();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -156,6 +158,18 @@ namespace minecraftWorldManager
 
         }
 
+        private void LoadQsaves() {
+            lbQuickBackups.Items.Clear ();
+          var path=  tbQbackupsLocPath.Text;
+            if(path == null) { return; }
+            var dirs=Directory.GetDirectories(path);
+            foreach (string dir in dirs) { 
+               
+                lbQuickBackups.Text = Path.GetFileName(dir);
+            
+            }
+        }
+        
         private void btnSelectBackups_Click(object sender, EventArgs e)
         {
             ProgramDat dataFile = ProgDataFileMngr.GetProgramData();
@@ -191,7 +205,7 @@ namespace minecraftWorldManager
 
         private void MCworldMngr_Load(object sender, EventArgs e)
         {
-
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void btnSelectQbackupFolder_Click(object sender, EventArgs e)
@@ -206,8 +220,17 @@ namespace minecraftWorldManager
             if (result == DialogResult.OK)
             {
                 tbQbackupsLocPath.Text = folderBrowserDialog.SelectedPath;
+                var QbackupsPath= tbQbackupsLocPath.Text; 
+                if (tbQbackupsLocPath.Text == tbBackupsPath.Text) {
+                    string newDir = "Qbackups";
+                    string newPathQBdir = Path.Combine(QbackupsPath,newDir);
+                    if (Directory.Exists(newPathQBdir)) { return; }
+                   Directory.CreateDirectory(newPathQBdir);
+                    QbackupsPath= newPathQBdir;
+                
+                }
 
-                data.quickBackupsPath = tbQbackupsLocPath.Text;
+                data.quickBackupsPath = QbackupsPath;
                 if (dataFile == null)
                 {
                     ProgDataFileMngr.UpdateProgData(data);
@@ -557,6 +580,86 @@ namespace minecraftWorldManager
 
 
             
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            InputForm input =new InputForm();
+            var selectedWorld = lbMcWorlds.SelectedItem;
+            if (selectedWorld == null) {
+                showErrorMsg("no world selected");
+                return;
+            }
+
+            input.ShowDialog();
+          var result=  input.GetResult();
+            if (DialogResult.OK != result) {
+                return;
+            }
+
+  
+            string savesFolderPath = tbMcSavesLocPath.Text;
+            string worldPath = Path.Combine(savesFolderPath, selectedWorld.ToString());
+            string newName = input.GetInput();
+
+            McFileMngr.RenameWorld(savesFolderPath,worldPath,newName);
+            refreshLists();
+
+            
+        }
+
+        private void btnQuickBackup_Click(object sender, EventArgs e)
+        {
+            var targetFolder = tbQbackupsLocPath.Text;
+            if (targetFolder == null) { return; }
+            string worlds=tbMcSavesLocPath.Text;
+            if(worlds == null) { return; }
+
+            DateTimeOffset  offset=DateTimeOffset.Now;
+
+            var newFolderName=Path.GetFileName(worlds)+ " _DS" + offset.ToUnixTimeSeconds();
+
+            var data = QbckpFileMngr.GetQuickBckpData();
+            if (data == null) {
+                data = new QuickBackupsDat();
+              
+                QbckpFileMngr.UpdateQbckpData(data);
+            }
+
+            
+         
+            McFileMngr.CopyWorldToRnm(worlds,tbQbackupsLocPath.Text,newFolderName,false);
+            refreshLists() ;
+        }
+
+        private void btnQuickBackupImport_Click(object sender, EventArgs e)
+        {
+            var qbackup = lbQuickBackups.SelectedItem;
+            var saves = tbMcSavesLocPath.Text;
+            if (qbackup==null)
+            {
+                showErrorMsg("quick backup not selected");
+                return;
+            }
+            var qBackupPath = Path.Combine(tbQbackupsLocPath.Text, qbackup.ToString());
+
+
+            McFileMngr.CopyAllSubdirsTo(qBackupPath,saves);
+
+            refreshLists();
+
+
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            var qbPath = tbQbackupsLocPath.Text;
+            var qb=lbQuickBackups.SelectedItem;
+            if (qb == null) { return; }
+            if (qbPath == null) { return; }
+            var fileToDelete = Path.Combine(qbPath, qb.ToString());
+            ConfirmDelete(fileToDelete);
+            refreshLists();
         }
     }
 }

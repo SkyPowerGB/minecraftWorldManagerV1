@@ -15,6 +15,18 @@ namespace minecraftWorldManager
         public CopyError()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
+
+        private void CopyError_Load(object sender, EventArgs e)
+        {
+
+        }
+    
+    
+    
+    
     }
+
+
 }

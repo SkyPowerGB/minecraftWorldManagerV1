@@ -63,6 +63,7 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbMcWorlds
@@ -91,7 +92,7 @@
             this.btnLoadSaves.Name = "btnLoadSaves";
             this.btnLoadSaves.Size = new System.Drawing.Size(95, 40);
             this.btnLoadSaves.TabIndex = 4;
-            this.btnLoadSaves.Text = "Open Saves";
+            this.btnLoadSaves.Text = "Refresh Saves";
             this.btnLoadSaves.UseVisualStyleBackColor = true;
             this.btnLoadSaves.Click += new System.EventHandler(this.btnLoadSaves_Click);
             // 
@@ -178,6 +179,7 @@
             this.btnQuickBackup.TabIndex = 48;
             this.btnQuickBackup.Text = "Quick backup";
             this.btnQuickBackup.UseVisualStyleBackColor = true;
+            this.btnQuickBackup.Click += new System.EventHandler(this.btnQuickBackup_Click);
             // 
             // lbQuickBackups
             // 
@@ -213,6 +215,7 @@
             this.btnQuickBackupImport.TabIndex = 53;
             this.btnQuickBackupImport.Text = "Import Quick";
             this.btnQuickBackupImport.UseVisualStyleBackColor = true;
+            this.btnQuickBackupImport.Click += new System.EventHandler(this.btnQuickBackupImport_Click);
             // 
             // lbBranchContents
             // 
@@ -375,6 +378,7 @@
             this.button12.TabIndex = 70;
             this.button12.Text = "Rename";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
@@ -394,11 +398,22 @@
             this.button14.Text = "Rename";
             this.button14.UseVisualStyleBackColor = true;
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(113, 661);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(95, 40);
+            this.button6.TabIndex = 73;
+            this.button6.Text = "DeleteQuick";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
+            // 
             // MCworldMngr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 723);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
@@ -479,6 +494,7 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button6;
     }
 }
 

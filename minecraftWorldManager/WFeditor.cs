@@ -17,6 +17,7 @@ namespace minecraftWorldManager
         {
             InitializeComponent();
             loadData();
+            this.StartPosition = FormStartPosition.CenterScreen;
 
         }
         public WFeditor(WorldDataFile WorldDataFile)
@@ -25,17 +26,25 @@ namespace minecraftWorldManager
             tbWorldVersion.Text = WorldDataFile.worldVersion;
             cbMcVersion.Text = WorldDataFile.minecraftVersion;
             loadData();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
-
-
         public WFeditor(String worldPath)
         {
         
 
             InitializeComponent();
-            this.WorldDataFile = WorldDataFileWorker.GetWroldDF(worldPath);
+            if (WorldDataFileWorker.IsMarked(worldPath))
+            {
+                this.WorldDataFile = WorldDataFileWorker.GetWroldDF(worldPath);
+                this.Close();
+            }
+
+          
             loadData();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
+
+
 
 
         private void WFeditor_Load(object sender, EventArgs e)

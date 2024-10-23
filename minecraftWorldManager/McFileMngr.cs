@@ -25,8 +25,6 @@ namespace minecraftWorldManager
             return branchPath;
 
         }
-
-
         public static void CopyWorldToRnm(string worldPath,string targetDir,string newWorldName,bool delete) {
             //prep
             string rename = newWorldName;
@@ -64,16 +62,11 @@ namespace minecraftWorldManager
 
 
         }
-
         public static void CutWorldToRnm(string worldPath,string targetDir, string newWorldName)
         {
             CopyWorldToRnm(worldPath,targetDir,newWorldName,true);
             
         }
-
-
-
-
         public static void CopyWorldTo(string worldPath, string targetBasePath)
         {
             
@@ -154,13 +147,43 @@ namespace minecraftWorldManager
                 return false;
             }
         }
+        public static void RenameWorld(string baseDirectory,string worldPath, string newName) {
+                         string newPath=Path.Combine(baseDirectory, newName);
+            try
+            {
+              
+                Directory.Move(worldPath, newPath);
 
-
+               
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
         public static void CopyWorldToBackups(string worldPath, string target)
         {
             if (!WorldDataFileWorker.IsMarked(worldPath)) { return; }
             CopyWorldToBackups(worldPath, target);
 
+
+        }
+
+        public static void CopyAllSubdirsTo(string sourceDirPath , string destinationPath) {
+                    if(sourceDirPath == null ) {
+                Console.WriteLine("copy failed source not found" );
+                return; }
+            if (destinationPath == null) {
+                Console.WriteLine("copy failed target not found");
+                return;
+            }
+
+            var dirs=Directory.GetDirectories(sourceDirPath);
+            foreach (var dir in dirs) {
+                Console.WriteLine("try copy" + dir);
+                CopyWorldTo(dir, destinationPath);
+            
+            }
 
         }
 
