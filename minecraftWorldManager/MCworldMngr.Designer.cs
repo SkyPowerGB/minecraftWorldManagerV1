@@ -40,7 +40,6 @@
             this.btnCopySavesToBackup = new System.Windows.Forms.Button();
             this.btnOpenMarkForm = new System.Windows.Forms.Button();
             this.btnQuickBackup = new System.Windows.Forms.Button();
-            this.btnLoadQuickBackup = new System.Windows.Forms.Button();
             this.lbQuickBackups = new System.Windows.Forms.ListBox();
             this.tbQbackupsLocPath = new System.Windows.Forms.TextBox();
             this.rTbDisplayWFdata = new System.Windows.Forms.RichTextBox();
@@ -57,6 +56,13 @@
             this.btnSelectQbackupFolder = new System.Windows.Forms.Button();
             this.btnEditMark = new System.Windows.Forms.Button();
             this.btnSelectSavesFold = new System.Windows.Forms.Button();
+            this.tbBranch = new System.Windows.Forms.TextBox();
+            this.tbLocalWorldPath = new System.Windows.Forms.TextBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbMcWorlds
@@ -98,10 +104,11 @@
             // 
             // tbMcSavesLocPath
             // 
-            this.tbMcSavesLocPath.Location = new System.Drawing.Point(12, 88);
+            this.tbMcSavesLocPath.Location = new System.Drawing.Point(12, 67);
             this.tbMcSavesLocPath.Name = "tbMcSavesLocPath";
             this.tbMcSavesLocPath.Size = new System.Drawing.Size(233, 20);
             this.tbMcSavesLocPath.TabIndex = 29;
+            this.tbMcSavesLocPath.TextChanged += new System.EventHandler(this.tbMcSavesLocPath_TextChanged);
             // 
             // btnSelectBackups
             // 
@@ -165,21 +172,12 @@
             // 
             // btnQuickBackup
             // 
-            this.btnQuickBackup.Location = new System.Drawing.Point(12, 720);
+            this.btnQuickBackup.Location = new System.Drawing.Point(12, 661);
             this.btnQuickBackup.Name = "btnQuickBackup";
             this.btnQuickBackup.Size = new System.Drawing.Size(95, 40);
             this.btnQuickBackup.TabIndex = 48;
             this.btnQuickBackup.Text = "Quick backup";
             this.btnQuickBackup.UseVisualStyleBackColor = true;
-            // 
-            // btnLoadQuickBackup
-            // 
-            this.btnLoadQuickBackup.Location = new System.Drawing.Point(113, 720);
-            this.btnLoadQuickBackup.Name = "btnLoadQuickBackup";
-            this.btnLoadQuickBackup.Size = new System.Drawing.Size(95, 40);
-            this.btnLoadQuickBackup.TabIndex = 49;
-            this.btnLoadQuickBackup.Text = "Load Quick";
-            this.btnLoadQuickBackup.UseVisualStyleBackColor = true;
             // 
             // lbQuickBackups
             // 
@@ -203,13 +201,13 @@
             this.rTbDisplayWFdata.Location = new System.Drawing.Point(363, 409);
             this.rTbDisplayWFdata.Name = "rTbDisplayWFdata";
             this.rTbDisplayWFdata.ReadOnly = true;
-            this.rTbDisplayWFdata.Size = new System.Drawing.Size(282, 351);
+            this.rTbDisplayWFdata.Size = new System.Drawing.Size(282, 176);
             this.rTbDisplayWFdata.TabIndex = 52;
             this.rTbDisplayWFdata.Text = "";
             // 
             // btnQuickBackupImport
             // 
-            this.btnQuickBackupImport.Location = new System.Drawing.Point(214, 720);
+            this.btnQuickBackupImport.Location = new System.Drawing.Point(214, 661);
             this.btnQuickBackupImport.Name = "btnQuickBackupImport";
             this.btnQuickBackupImport.Size = new System.Drawing.Size(95, 40);
             this.btnQuickBackupImport.TabIndex = 53;
@@ -243,6 +241,7 @@
             this.button2.TabIndex = 56;
             this.button2.Text = "CopyToBranch";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // button3
             // 
@@ -252,6 +251,7 @@
             this.button3.TabIndex = 57;
             this.button3.Text = "CutToBranch";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -261,6 +261,7 @@
             this.button4.TabIndex = 59;
             this.button4.Text = "Cut to saves";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // button5
             // 
@@ -270,6 +271,7 @@
             this.button5.TabIndex = 58;
             this.button5.Text = "Copy To Saves";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button7
             // 
@@ -283,12 +285,13 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(550, 347);
+            this.button8.Location = new System.Drawing.Point(549, 348);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(95, 22);
             this.button8.TabIndex = 62;
             this.button8.Text = "Delete";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
@@ -298,6 +301,7 @@
             this.button9.TabIndex = 63;
             this.button9.Text = "Delete";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // btnSelectQbackupFolder
             // 
@@ -320,18 +324,88 @@
             // 
             // btnSelectSavesFold
             // 
-            this.btnSelectSavesFold.Location = new System.Drawing.Point(251, 88);
+            this.btnSelectSavesFold.Location = new System.Drawing.Point(251, 67);
             this.btnSelectSavesFold.Name = "btnSelectSavesFold";
             this.btnSelectSavesFold.Size = new System.Drawing.Size(47, 20);
             this.btnSelectSavesFold.TabIndex = 30;
             this.btnSelectSavesFold.Text = "Open";
             this.btnSelectSavesFold.UseVisualStyleBackColor = true;
+            this.btnSelectSavesFold.Click += new System.EventHandler(this.btnSelectSavesFold_Click);
+            // 
+            // tbBranch
+            // 
+            this.tbBranch.Location = new System.Drawing.Point(672, 88);
+            this.tbBranch.Name = "tbBranch";
+            this.tbBranch.ReadOnly = true;
+            this.tbBranch.Size = new System.Drawing.Size(293, 20);
+            this.tbBranch.TabIndex = 65;
+            // 
+            // tbLocalWorldPath
+            // 
+            this.tbLocalWorldPath.Location = new System.Drawing.Point(12, 93);
+            this.tbLocalWorldPath.Name = "tbLocalWorldPath";
+            this.tbLocalWorldPath.Size = new System.Drawing.Size(134, 20);
+            this.tbLocalWorldPath.TabIndex = 66;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(152, 93);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(47, 20);
+            this.button10.TabIndex = 68;
+            this.button10.Text = "Select";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(205, 93);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(93, 20);
+            this.button11.TabIndex = 69;
+            this.button11.Text = "Cut To Saves";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(214, 12);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(95, 40);
+            this.button12.TabIndex = 70;
+            this.button12.Text = "Rename";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(549, 12);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(95, 40);
+            this.button13.TabIndex = 71;
+            this.button13.Text = "Rename";
+            this.button13.UseVisualStyleBackColor = true;
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(874, 12);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(95, 40);
+            this.button14.TabIndex = 72;
+            this.button14.Text = "Rename";
+            this.button14.UseVisualStyleBackColor = true;
             // 
             // MCworldMngr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1011, 772);
+            this.ClientSize = new System.Drawing.Size(1011, 723);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.tbLocalWorldPath);
+            this.Controls.Add(this.tbBranch);
             this.Controls.Add(this.btnSelectQbackupFolder);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -346,7 +420,6 @@
             this.Controls.Add(this.rTbDisplayWFdata);
             this.Controls.Add(this.tbQbackupsLocPath);
             this.Controls.Add(this.lbQuickBackups);
-            this.Controls.Add(this.btnLoadQuickBackup);
             this.Controls.Add(this.btnQuickBackup);
             this.Controls.Add(this.btnOpenMarkForm);
             this.Controls.Add(this.btnEditMark);
@@ -383,7 +456,6 @@
         private System.Windows.Forms.Button btnCopySavesToBackup;
         private System.Windows.Forms.Button btnOpenMarkForm;
         private System.Windows.Forms.Button btnQuickBackup;
-        private System.Windows.Forms.Button btnLoadQuickBackup;
         private System.Windows.Forms.ListBox lbQuickBackups;
         private System.Windows.Forms.TextBox tbQbackupsLocPath;
         private System.Windows.Forms.RichTextBox rTbDisplayWFdata;
@@ -400,6 +472,13 @@
         private System.Windows.Forms.Button btnSelectQbackupFolder;
         private System.Windows.Forms.Button btnEditMark;
         private System.Windows.Forms.Button btnSelectSavesFold;
+        private System.Windows.Forms.TextBox tbBranch;
+        private System.Windows.Forms.TextBox tbLocalWorldPath;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
     }
 }
 

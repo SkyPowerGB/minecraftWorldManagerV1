@@ -8,6 +8,7 @@ namespace minecraftWorldManager
 {
     internal class ProgramDat
     {
+        public string mcSavesPath;
         public string backupsPath;
         public string quickBackupsPath;
 
