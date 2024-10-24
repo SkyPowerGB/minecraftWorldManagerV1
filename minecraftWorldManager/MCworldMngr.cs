@@ -410,7 +410,7 @@ namespace minecraftWorldManager
             if(worldToCopy == null) { return; };
             var savesPath=tbMcSavesLocPath.Text;
             var worldPath=Path.Combine(tbBackupsPath.Text,worldToCopy.ToString());
-            McFileMngr.CopyWorldTo(worldPath,savesPath);
+            McFileMngr.CopyWorldTo(worldPath,savesPath,false);
             refreshLists();
         }
 
@@ -422,7 +422,7 @@ namespace minecraftWorldManager
             var backupsPath = tbBackupsPath.Text;
             var worldPath = Path.Combine(tbMcSavesLocPath.Text, worldToCopy.ToString());
             if (!WorldDataFileWorker.IsMarked(worldPath)) { showErrorMsg("World isnt MARKED!"); return; } 
-            McFileMngr.CopyWorldTo(worldPath, backupsPath);
+            McFileMngr.CopyWorldTo(worldPath, backupsPath,false);
             refreshLists();
         }
 
@@ -504,7 +504,7 @@ namespace minecraftWorldManager
             Console.WriteLine("targer:" +targetPath);
             Console.WriteLine("world:" + worldPath);
 
-            McFileMngr.CopyWorldTo(worldPath, targetPath);
+            McFileMngr.CopyWorldTo(worldPath, targetPath, false);
             refreshLists();
         }
 
@@ -721,12 +721,14 @@ namespace minecraftWorldManager
         private void displayWorldData(WorldDataFile df) {
             if(df == null) { return; }
             rTbDisplayWFdata.Clear();
-            rTbDisplayWFdata.Text += "Last edited:  " + df.marked + Environment.NewLine;
+            rTbDisplayWFdata.Text += "Stamped:  " + df.marked + Environment.NewLine;
+            rTbDisplayWFdata.Text += Environment.NewLine;
+            rTbDisplayWFdata.Text += "Last Edited:  " + df.saveDate + Environment.NewLine;
             rTbDisplayWFdata.Text += Environment.NewLine;
             rTbDisplayWFdata.Text += "World Version:  " + df.worldVersion + Environment.NewLine;
             rTbDisplayWFdata.Text += Environment.NewLine;
-            rTbDisplayWFdata.Text += "Minecraft version:  " + df.minecraftVersion + Environment.NewLine; 
-
+            rTbDisplayWFdata.Text += "Minecraft version:  " + df.minecraftVersion + Environment.NewLine;
+         
         }
 
         private void displayQbckpWorldsNames(string selectedQB) {

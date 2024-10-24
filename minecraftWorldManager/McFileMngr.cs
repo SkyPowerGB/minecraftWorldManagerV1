@@ -26,18 +26,31 @@ namespace minecraftWorldManager
 
         }
         public static void CopyWorldToRnm(string worldPath,string targetDir,string newWorldName,bool delete) {
-            //prep
+           
             string rename = newWorldName;
             if (rename == null) { rename = Path.GetFileName(worldPath); }
             string newWorldPath= Path.Combine(targetDir, rename);
 
-            //check if exists
-            if (Directory.Exists(newWorldPath)){ return; }
+          
+            if (Directory.Exists(newWorldPath)){ 
+                FolderExistsErrorForm folderExistsDialog=new FolderExistsErrorForm(worldPath,newWorldPath);
+                folderExistsDialog.ShowDialog();
+                if (folderExistsDialog.result == FolderExistsErrorForm.CANCEL) { return; }
+                else if (folderExistsDialog.result == FolderExistsErrorForm.OVERWRITE) { }
+                else if (folderExistsDialog.result == FolderExistsErrorForm.RENAME)
+                {
+                    CopyWorldToRnm(worldPath,targetDir,folderExistsDialog.NewName,false);
 
-            //create new targetDir
+                    return;
+                }
+                
+                
+               }
+
+            
             Directory.CreateDirectory(newWorldPath);
 
-            //get all sub folders and files out
+            
             var dirs= Directory.GetDirectories(worldPath);
             var files=Directory.GetFiles(worldPath);
           
@@ -69,7 +82,13 @@ namespace minecraftWorldManager
         }
         public static void CopyWorldTo(string worldPath, string targetBasePath)
         {
-            
+
+            CopyWorldTo(worldPath,targetBasePath,true);
+        }
+
+        public static void CopyWorldTo(string worldPath, string targetBasePath,bool overWrite)
+        {
+
             string targetDirPath = Path.Combine(targetBasePath, Path.GetFileName(worldPath));
 
             if (!Directory.Exists(targetDirPath))
@@ -83,9 +102,26 @@ namespace minecraftWorldManager
                     Console.WriteLine($"Failed to create directory {targetDirPath}: {e.Message}");
                     return;
                 }
-            }
+            } else if (Directory.Exists(targetDirPath)&&!overWrite) {
+                FolderExistsErrorForm folderExists = new FolderExistsErrorForm(worldPath,targetDirPath);
+                folderExists.ShowDialog();
+                var result=folderExists.result;
+                if (result == FolderExistsErrorForm.RENAME)
+                {
+                    targetDirPath = Path.Combine(targetBasePath, folderExists.NewName);
+                    CopyWorldToRnm(worldPath,targetBasePath,folderExists.NewName,false);
+                        return;
+                }
+                else if (result == FolderExistsErrorForm.OVERWRITE)
+                {
+                    CopyWorldTo(worldPath, targetBasePath,true);
+                }
+                else if (result == FolderExistsErrorForm.CANCEL) {
 
+                    return;
+                }
             
+            }
             var files = Directory.GetFiles(worldPath);
             foreach (string file in files)
             {
@@ -94,15 +130,18 @@ namespace minecraftWorldManager
                 System.IO.File.Copy(file, destFile, true);
             }
 
-            
+
             var directories = Directory.GetDirectories(worldPath);
             if (directories == null) { return; }
             foreach (string directory in directories)
             {
-              
-                CopyWorldTo(directory, targetDirPath);
+
+                CopyWorldTo(directory, targetDirPath,true);
             }
+
         }
+
+
         public static bool CutWorldTo(string worldPath, string worldPathNew)
         {
           
@@ -120,7 +159,7 @@ namespace minecraftWorldManager
 
                 if (Directory.Exists(worldPathNew))
                 {
-                    Console.WriteLine($"Target directory already exists: {worldPathNew}");
+                   
 
                     FolderExistsErrorForm folderExists = new FolderExistsErrorForm(worldPath, worldPathNew);
                     folderExists.ShowDialog();
@@ -134,7 +173,8 @@ namespace minecraftWorldManager
 
                     } else if (
                         folderExists.result == FolderExistsErrorForm.OVERWRITE ) {
-                        CutWorldToRnm(worldPath,Path.GetDirectoryName(worldPathNew),null);
+                        CopyWorldTo(worldPath,Path.GetDirectoryName(worldPathNew));
+                        Directory.Delete(worldPath,true);
                     }
                     return false;
                 }
@@ -198,7 +238,7 @@ namespace minecraftWorldManager
             var dirs=Directory.GetDirectories(sourceDirPath);
             foreach (var dir in dirs) {
                 Console.WriteLine("try copy" + dir);
-                CopyWorldTo(dir, destinationPath);
+                CopyWorldTo(dir, destinationPath,false);
             
             }
 

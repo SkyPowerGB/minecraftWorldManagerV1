@@ -31,7 +31,7 @@ namespace minecraftWorldManager
             if (worldDataFile != null&&targetWorldDataFile!=null) {
 
 
-                rtbWorld1DatF.Text +="Last modified:"+ worldDataFile.marked+Environment.NewLine;
+                rtbWorld1DatF.Text +="Last modified:"+ worldDataFile.saveDate+Environment.NewLine;
                 rtbWorld1DatF.Text +=  Environment.NewLine;
 
                 rtbWorld1DatF.Text += "World Version:" + worldDataFile.worldVersion + Environment.NewLine;
