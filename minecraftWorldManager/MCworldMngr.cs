@@ -379,7 +379,7 @@ namespace minecraftWorldManager
                 
                 
 
-            McFileMngr.CutWorldTo(worldPath,targetPath);
+            McFileMngr.CutWorldToRnm(worldPath,targetPath,null);
 
             LoadBackups();
             LoadSaves();
@@ -397,7 +397,7 @@ namespace minecraftWorldManager
           
 
             string targetPath = Path.Combine(tbMcSavesLocPath.Text, save.ToString());
-            McFileMngr.CutWorldTo(worldPath, targetPath);
+            McFileMngr.CutWorldToRnm(worldPath, targetPath,null);
             LoadSaves();
             LoadBackups();
 
