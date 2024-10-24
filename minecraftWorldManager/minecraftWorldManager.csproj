@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="fNbt, Version=0.6.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\fNbt.0.6.4\lib\net35-client\fNbt.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -71,6 +74,12 @@
     <Compile Include="CopyError.Designer.cs">
       <DependentUpon>CopyError.cs</DependentUpon>
     </Compile>
+    <Compile Include="McNTBfleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="McNTBfleForm.Designer.cs">
+      <DependentUpon>McNTBfleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InputDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +92,8 @@
     <Compile Include="MCworldMngr.Designer.cs">
       <DependentUpon>MCworldMngr.cs</DependentUpon>
     </Compile>
+    <Compile Include="MinecraftNBTfileManager.cs" />
+    <Compile Include="MinecraftNBTmodel.cs" />
     <Compile Include="ProgDataFileMngr.cs" />
     <Compile Include="ProgramDat.cs" />
     <Compile Include="QbckpFileMngr.cs" />
@@ -100,6 +111,9 @@
     <Compile Include="WorldDataFileWorker.cs" />
     <EmbeddedResource Include="CopyError.resx">
       <DependentUpon>CopyError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="McNTBfleForm.resx">
+      <DependentUpon>McNTBfleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InputDialog.resx">
       <DependentUpon>InputDialog.cs</DependentUpon>

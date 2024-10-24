@@ -759,6 +759,10 @@ namespace minecraftWorldManager
             if (lbMcWorlds.SelectedItem == null) {
                 return false; } return true; }
 
+        public bool isBranchSelected() {
+        if(lbBranchContents.SelectedItem == null) { return false; }
+            return true;
+        }
         public string getSelectedBackupPath() {
             if (lbBackups.SelectedItem == null) { return null; }
             return Path.Combine(tbBackupsPath.Text, lbBackups.SelectedItem.ToString());
@@ -782,6 +786,29 @@ namespace minecraftWorldManager
         private void lbBranchContents_SelectedIndexChanged(object sender, EventArgs e)
         {
             displayWorldData(WorldDataFileWorker.GetWroldDF(getSelectedBranchSavePath()));
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            if (!isSaveSelected()) { return; }
+            EditWorldNBTform form = new EditWorldNBTform(getSelectedSavePath());
+            form.ShowDialog();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (!isBackupSelected()) { return; }
+            if (WorldDataFileWorker.IsBranch(getSelectedBackupPath())) { return; }
+            EditWorldNBTform form = new EditWorldNBTform(getSelectedBackupPath());
+            form.ShowDialog();
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+        
+            if(!isBranchSelected()) { return; }
+            EditWorldNBTform form = new EditWorldNBTform(getSelectedBranchSavePath());
+            form.ShowDialog();
         }
     }
 

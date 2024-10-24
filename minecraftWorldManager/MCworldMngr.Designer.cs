@@ -64,6 +64,9 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbMcWorlds
@@ -241,7 +244,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(12, 347);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 23);
+            this.button2.Size = new System.Drawing.Size(96, 23);
             this.button2.TabIndex = 56;
             this.button2.Text = "CopyToBranch";
             this.button2.UseVisualStyleBackColor = true;
@@ -249,9 +252,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(113, 347);
+            this.button3.Location = new System.Drawing.Point(12, 376);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(95, 23);
+            this.button3.Size = new System.Drawing.Size(96, 23);
             this.button3.TabIndex = 57;
             this.button3.Text = "CutToBranch";
             this.button3.UseVisualStyleBackColor = true;
@@ -279,9 +282,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(214, 347);
+            this.button7.Location = new System.Drawing.Point(202, 347);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(84, 22);
+            this.button7.Size = new System.Drawing.Size(96, 22);
             this.button7.TabIndex = 61;
             this.button7.Text = "Delete";
             this.button7.UseVisualStyleBackColor = true;
@@ -299,7 +302,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(870, 346);
+            this.button9.Location = new System.Drawing.Point(870, 345);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(95, 22);
             this.button9.TabIndex = 63;
@@ -412,11 +415,44 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click_1);
             // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(114, 347);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(85, 23);
+            this.button15.TabIndex = 74;
+            this.button15.Text = "EditNBT";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(460, 348);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(83, 23);
+            this.button16.TabIndex = 75;
+            this.button16.Text = "EditNBT";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(785, 345);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(83, 23);
+            this.button17.TabIndex = 76;
+            this.button17.Text = "EditNBT";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
             // MCworldMngr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 723);
+            this.Controls.Add(this.button17);
+            this.Controls.Add(this.button16);
+            this.Controls.Add(this.button15);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
@@ -499,6 +535,9 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
     }
 }
 

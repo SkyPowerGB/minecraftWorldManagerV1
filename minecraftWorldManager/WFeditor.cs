@@ -70,5 +70,9 @@ namespace minecraftWorldManager
             return worldDataFile;
         }
 
+        private void WFeditor_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
