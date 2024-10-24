@@ -32,19 +32,19 @@ namespace minecraftWorldManager
 
         }
 
-        public static void CreateBranch(String location) { 
-           if(IsBranch(location)) { return; }
-           if(IsMarked(location)) { return; }
+        public static string CreateBranch(String location) { 
+           if(IsBranch(location)) { return ""; }
+           if(IsMarked(location)) { return ""; }
             BranchFlag flag = new BranchFlag();
             flag.Branch = true;
 
-
+            string flagPath = Path.Combine(location, branchName);
             String json = JsonConvert.SerializeObject(flag, Formatting.Indented);
-            File.WriteAllText(Path.Combine(location,branchName), json);
+            File.WriteAllText(flagPath, json);
 
 
 
-
+            return flagPath;
         }
 
         public static bool IsBranch(String path) { 
@@ -72,6 +72,7 @@ namespace minecraftWorldManager
 
             string json=File.ReadAllText(filePath);
             WorldDataFile file=JsonConvert.DeserializeObject<WorldDataFile>(json);
+            Console.WriteLine("world version get file:"+ file.worldVersion);
             return file;
      
         }

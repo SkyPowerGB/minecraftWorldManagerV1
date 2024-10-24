@@ -111,6 +111,8 @@ namespace minecraftWorldManager
 
                 if (!Directory.Exists(worldPath))
                 {
+                 
+
                     Console.WriteLine($"Source directory does not exist: {worldPath}");
                     return false;
                 }
@@ -119,6 +121,21 @@ namespace minecraftWorldManager
                 if (Directory.Exists(worldPathNew))
                 {
                     Console.WriteLine($"Target directory already exists: {worldPathNew}");
+
+                    FolderExistsErrorForm folderExists = new FolderExistsErrorForm(worldPath, worldPathNew);
+                    folderExists.ShowDialog();
+                    if (folderExists.result == FolderExistsErrorForm.RENAME)
+                    {
+
+                        var targetParent = Path.GetDirectoryName(worldPathNew);
+                        var newTargetPath = Path.Combine(targetParent, folderExists.NewName);
+                        CutWorldTo(worldPath, newTargetPath);
+
+
+                    } else if (
+                        folderExists.result == FolderExistsErrorForm.OVERWRITE ) {
+                        CutWorldToRnm(worldPath,Path.GetDirectoryName(worldPathNew),null);
+                    }
                     return false;
                 }
 
@@ -188,59 +205,7 @@ namespace minecraftWorldManager
         }
 
         private static List<DateTime> dates = new List<DateTime>();
-        private static void GetAllFolderFileAvgDates(string path)
-        {
-
-
-            var files = Directory.GetFiles(path);
-            foreach (var file in files)
-            {
-                dates.Add(System.IO.File.GetLastWriteTime(file));
-            }
-
-            if (!Directory.GetDirectories(path).Any())
-            {
-
-                return;
-
-            }
-            var directories = Directory.GetDirectories(path);
-            var filesG = Directory.GetFiles(path);
-
-
-
-            foreach (var d in directories)
-            {
-                dates.Add(Directory.GetLastWriteTime(Path.Combine(path, Path.GetDirectoryName(d))));
-                GetAllFolderFileAvgDates(Path.Combine(path, Path.GetDirectoryName(d)));
-            }
-
-
-        }
-
-        private static DateTime CalculateAverageDate(List<DateTime> dates)
-        {
-            if (dates.Count == 0)
-            {
-                throw new InvalidOperationException("No dates to calculate average.");
-            }
-
-
-            long averageTicks = (long)dates.Average(date => date.Ticks);
-
-
-            return new DateTime(averageTicks);
-        }
-
-        private static DateTime GetWorldAvgTime(string path)
-        {
-
-            dates.Clear();
-            GetAllFolderFileAvgDates(path);
-            return CalculateAverageDate(dates);
-
-        }
-
+       
 
 
 

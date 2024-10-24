@@ -1,6 +1,6 @@
 ﻿namespace minecraftWorldManager
 {
-    partial class CopyError
+    partial class FolderExistsErrorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,14 +32,10 @@
             this.rtbWorld2DatF = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblWrold1Date = new System.Windows.Forms.Label();
-            this.lblWorld2date = new System.Windows.Forms.Label();
             this.tbNewWorldName = new System.Windows.Forms.TextBox();
             this.btnRename = new System.Windows.Forms.Button();
             this.btnOverWrite = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnBranch = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // rtbWorld1DatF
@@ -61,7 +57,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(118, 50);
+            this.label1.Location = new System.Drawing.Point(38, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 2;
@@ -70,29 +66,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(303, 50);
+            this.label2.Location = new System.Drawing.Point(300, 94);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "World 2:";
-            // 
-            // lblWrold1Date
-            // 
-            this.lblWrold1Date.AutoSize = true;
-            this.lblWrold1Date.Location = new System.Drawing.Point(118, 73);
-            this.lblWrold1Date.Name = "lblWrold1Date";
-            this.lblWrold1Date.Size = new System.Drawing.Size(35, 13);
-            this.lblWrold1Date.TabIndex = 4;
-            this.lblWrold1Date.Text = "label3";
-            // 
-            // lblWorld2date
-            // 
-            this.lblWorld2date.AutoSize = true;
-            this.lblWorld2date.Location = new System.Drawing.Point(303, 73);
-            this.lblWorld2date.Name = "lblWorld2date";
-            this.lblWorld2date.Size = new System.Drawing.Size(35, 13);
-            this.lblWorld2date.TabIndex = 5;
-            this.lblWorld2date.Text = "label4";
             // 
             // tbNewWorldName
             // 
@@ -109,6 +87,7 @@
             this.btnRename.TabIndex = 7;
             this.btnRename.Text = "Rename";
             this.btnRename.UseVisualStyleBackColor = true;
+            this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
             // 
             // btnOverWrite
             // 
@@ -118,6 +97,7 @@
             this.btnOverWrite.TabIndex = 9;
             this.btnOverWrite.Text = "Over write";
             this.btnOverWrite.UseVisualStyleBackColor = true;
+            this.btnOverWrite.Click += new System.EventHandler(this.btnOverWrite_Click);
             // 
             // btnCancel
             // 
@@ -127,44 +107,23 @@
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnBranch
-            // 
-            this.btnBranch.Location = new System.Drawing.Point(146, 152);
-            this.btnBranch.Name = "btnBranch";
-            this.btnBranch.Size = new System.Drawing.Size(106, 44);
-            this.btnBranch.TabIndex = 11;
-            this.btnBranch.Text = "Branch";
-            this.btnBranch.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 73);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "LAST MODIFIED:";
-            // 
-            // CopyError
+            // FolderExistsErrorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 392);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnBranch);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOverWrite);
             this.Controls.Add(this.btnRename);
             this.Controls.Add(this.tbNewWorldName);
-            this.Controls.Add(this.lblWorld2date);
-            this.Controls.Add(this.lblWrold1Date);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtbWorld2DatF);
             this.Controls.Add(this.rtbWorld1DatF);
-            this.Name = "CopyError";
-            this.Text = "CopyError";
+            this.Name = "FolderExistsErrorForm";
+            this.Text = "Folder already exists";
             this.Load += new System.EventHandler(this.CopyError_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -177,13 +136,9 @@
         private System.Windows.Forms.RichTextBox rtbWorld2DatF;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblWrold1Date;
-        private System.Windows.Forms.Label lblWorld2date;
         private System.Windows.Forms.TextBox tbNewWorldName;
         private System.Windows.Forms.Button btnRename;
         private System.Windows.Forms.Button btnOverWrite;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnBranch;
-        private System.Windows.Forms.Label label3;
     }
 }

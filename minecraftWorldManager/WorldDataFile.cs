@@ -12,17 +12,17 @@ namespace minecraftWorldManager
         public WorldDataFile() { }
         public WorldDataFile(string minecraftVersion, string worldVersion)
         {
-            this.worldVersion = minecraftVersion;
-            this.minecraftVersion = worldVersion;
+            this.worldVersion = worldVersion;
+            this.minecraftVersion = minecraftVersion;
             this.marked = DateTime.Now;
 
         }
 
         public string worldVersion;
         public string minecraftVersion;
-        public DateTime marked;
+        public DateTime? marked;
 
-        public DateTime saveDate;
+        public DateTime? saveDate;
 
        
 

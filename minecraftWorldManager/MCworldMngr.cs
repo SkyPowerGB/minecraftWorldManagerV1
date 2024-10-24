@@ -257,38 +257,24 @@ namespace minecraftWorldManager
 
         private void btnOpenMarkForm_Click(object sender, EventArgs e)
         {
-            if (lbMcWorlds.SelectedItem == null) {
+            if (lbMcWorlds.SelectedItem == null)
+            {
                 showErrorMsg("World not selected!");
                 return;
             }
-           string selectedWorld=lbMcWorlds.SelectedItem.ToString();
+
+            string selectedWorld = lbMcWorlds.SelectedItem.ToString();
             string worldPath = Path.Combine(tbMcSavesLocPath.Text, selectedWorld);
 
+            WFeditor wFeditor=new WFeditor(worldPath);
 
 
-            WFeditor wFeditor;
-
-
-            if (WorldDataFileWorker.IsMarked(worldPath)) {
-                wFeditor = new WFeditor(WorldDataFileWorker.GetWroldDF(worldPath));
-            }
-            else
-            {
-                wFeditor = new WFeditor(worldPath);
-            }
-
-            var file= WorldDataFileWorker.GetWroldDF(worldPath);
-
-
-            
             wFeditor.ShowDialog();
-            if (wFeditor.WorldDataFile != null)
+            if (wFeditor.result == DialogResult.OK)
             {
-              
-                    WorldDataFileWorker.MarkWorld(worldPath, wFeditor.WorldDataFile);
-                
-              
+                WorldDataFileWorker.MarkWorld(worldPath, wFeditor.GetWorldDataFile());
             }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -723,7 +709,7 @@ namespace minecraftWorldManager
             editor.ShowDialog();
             if (editor.result == DialogResult.OK) {
 
-                WorldDataFileWorker.MarkWorld(backupWorldPath,editor.WorldDataFile);
+                WorldDataFileWorker.MarkWorld(backupWorldPath,editor.GetWorldDataFile());
             
             }
            
@@ -737,9 +723,9 @@ namespace minecraftWorldManager
             rTbDisplayWFdata.Clear();
             rTbDisplayWFdata.Text += "Last edited:  " + df.marked + Environment.NewLine;
             rTbDisplayWFdata.Text += Environment.NewLine;
-            rTbDisplayWFdata.Text += "World Version:  " + df.minecraftVersion + Environment.NewLine;
+            rTbDisplayWFdata.Text += "World Version:  " + df.worldVersion + Environment.NewLine;
             rTbDisplayWFdata.Text += Environment.NewLine;
-            rTbDisplayWFdata.Text += "Minecraft version:  " + df.worldVersion + Environment.NewLine; 
+            rTbDisplayWFdata.Text += "Minecraft version:  " + df.minecraftVersion + Environment.NewLine; 
 
         }
 

@@ -99,7 +99,7 @@
             this.Controls.Add(this.tbWorldVersion);
             this.Name = "WFeditor";
             this.Text = "WF editor";
-            this.Load += new System.EventHandler(this.WFeditor_Load);
+            
             this.ResumeLayout(false);
             this.PerformLayout();
 
