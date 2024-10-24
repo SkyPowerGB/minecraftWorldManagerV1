@@ -66,6 +66,7 @@ namespace minecraftWorldManager
         }
   
         public static WorldDataFile GetWroldDF(string path) {
+            if (path == null) { return null; }
             string filePath =Path.Combine(path, fileName);
             if (!File.Exists(filePath)) { return null; }
         

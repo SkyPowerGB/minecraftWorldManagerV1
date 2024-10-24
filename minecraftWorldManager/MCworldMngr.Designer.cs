@@ -220,11 +220,12 @@
             // lbBranchContents
             // 
             this.lbBranchContents.FormattingEnabled = true;
-            this.lbBranchContents.Location = new System.Drawing.Point(672, 115);
+            this.lbBranchContents.Location = new System.Drawing.Point(672, 114);
             this.lbBranchContents.Name = "lbBranchContents";
             this.lbBranchContents.ScrollAlwaysVisible = true;
             this.lbBranchContents.Size = new System.Drawing.Size(293, 225);
             this.lbBranchContents.TabIndex = 54;
+            this.lbBranchContents.SelectedIndexChanged += new System.EventHandler(this.lbBranchContents_SelectedIndexChanged);
             // 
             // button1
             // 

@@ -302,17 +302,24 @@ namespace minecraftWorldManager
             if (!isBackupSelected()) {
                 return;
             
-            
-    
+          
             }
 
             var backupPath= getSelectedBackupPath();
             var worldDataFile = WorldDataFileWorker.GetWroldDF(backupPath);
+
             displayWorldData(worldDataFile);
-            if (!WorldDataFileWorker.IsBranch(backupPath)) { return; }
+
+            if (!WorldDataFileWorker.IsBranch(backupPath)) {  return; }
+
+          
+
             displayWorldData(worldDataFile);
+
             var dirs=Directory.GetDirectories(backupPath);
+
             lbBranchContents.Items.Clear();
+
             tbBranch.Text = backupPath;
 
             foreach (string dir in dirs) { 
@@ -462,7 +469,7 @@ namespace minecraftWorldManager
 
             var targetPath = Path.Combine(branch, item.ToString());
             var worldPath = Path.Combine(tbMcSavesLocPath.Text, item.ToString());
-
+            if (WorldDataFileWorker.IsMarked(worldPath)) { showErrorMsg("World not marked!"); return; }
 
             var dataFile = WorldDataFileWorker.GetWroldDF(worldPath);
             var dateTimeOffset = new DateTimeOffset(DateTime.Now);
@@ -483,7 +490,7 @@ namespace minecraftWorldManager
 
             
             var worldPath = Path.Combine(tbMcSavesLocPath.Text, item.ToString());
-           
+            if (WorldDataFileWorker.IsMarked(worldPath)) { showErrorMsg("World not marked!"); return; }
             var dataFile=WorldDataFileWorker.GetWroldDF(worldPath);
             var dateTimeOffset = new DateTimeOffset(DateTime.Now);
 
@@ -720,8 +727,9 @@ namespace minecraftWorldManager
 
 
         private void displayWorldData(WorldDataFile df) {
-            if(df == null) { return; }
             rTbDisplayWFdata.Clear();
+            if (df == null) { rTbDisplayWFdata.Text += "NOT STAMPED OR NOT SELECTED"; return; }
+           
             rTbDisplayWFdata.Text += "Stamped:  " + df.marked + Environment.NewLine;
             rTbDisplayWFdata.Text += Environment.NewLine;
             rTbDisplayWFdata.Text += "Last Edited:  " + df.saveDate + Environment.NewLine;
@@ -766,8 +774,15 @@ namespace minecraftWorldManager
             return Path.Combine(tbMcSavesLocPath.Text, lbMcWorlds.SelectedItem.ToString());
         }
 
+        public string getSelectedBranchSavePath() {
+            if(lbBranchContents.SelectedItem==null) { return null; }
+            return Path.Combine(tbBranch.Text,lbBranchContents.SelectedItem.ToString());
+        }
 
-
+        private void lbBranchContents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displayWorldData(WorldDataFileWorker.GetWroldDF(getSelectedBranchSavePath()));
+        }
     }
 
 
