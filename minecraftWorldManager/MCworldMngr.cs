@@ -375,7 +375,7 @@ namespace minecraftWorldManager
                 showErrorMsg("File not marked");
                 return; }
 
-            string targetPath = Path.Combine(tbBackupsPath.Text, save.ToString());
+            string targetPath = tbBackupsPath.Text;
                 
                 
 
@@ -393,10 +393,11 @@ namespace minecraftWorldManager
 
 
             string worldPath = Path.Combine(tbBackupsPath.Text, save.ToString());
-          
-          
 
-            string targetPath = Path.Combine(tbMcSavesLocPath.Text, save.ToString());
+            if (WorldDataFileWorker.IsBranch(worldPath)){ return; }
+
+
+            string targetPath = tbMcSavesLocPath.Text;
             McFileMngr.CutWorldToRnm(worldPath, targetPath,null);
             LoadSaves();
             LoadBackups();
