@@ -67,6 +67,7 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
+            this.btnCopyToSaves = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbMcWorlds
@@ -209,6 +210,7 @@
             this.rTbDisplayWFdata.Size = new System.Drawing.Size(282, 176);
             this.rTbDisplayWFdata.TabIndex = 52;
             this.rTbDisplayWFdata.Text = "";
+            this.rTbDisplayWFdata.TextChanged += new System.EventHandler(this.rTbDisplayWFdata_TextChanged);
             // 
             // btnQuickBackupImport
             // 
@@ -367,11 +369,11 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(205, 93);
+            this.button11.Location = new System.Drawing.Point(251, 93);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(93, 20);
+            this.button11.Size = new System.Drawing.Size(47, 20);
             this.button11.TabIndex = 69;
-            this.button11.Text = "Cut To Saves";
+            this.button11.Text = "Cut ";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -445,11 +447,22 @@
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
+            // btnCopyToSaves
+            // 
+            this.btnCopyToSaves.Location = new System.Drawing.Point(202, 93);
+            this.btnCopyToSaves.Name = "btnCopyToSaves";
+            this.btnCopyToSaves.Size = new System.Drawing.Size(47, 20);
+            this.btnCopyToSaves.TabIndex = 77;
+            this.btnCopyToSaves.Text = "Copy";
+            this.btnCopyToSaves.UseVisualStyleBackColor = true;
+            this.btnCopyToSaves.Click += new System.EventHandler(this.btnCopyToSaves_Click);
+            // 
             // MCworldMngr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 723);
+            this.Controls.Add(this.btnCopyToSaves);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
@@ -538,6 +551,7 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button btnCopyToSaves;
     }
 }
 

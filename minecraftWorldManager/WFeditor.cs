@@ -54,6 +54,7 @@ namespace minecraftWorldManager
 
             tbWorldVersion.Text = worldDataFile.worldVersion ?? string.Empty; 
             cbMcVersion.Text = worldDataFile.minecraftVersion ?? string.Empty; 
+            tbDescription.Text=worldDataFile.Description ?? string.Empty;
         }
 
         private void btnMark_Click(object sender, EventArgs e)
@@ -61,6 +62,7 @@ namespace minecraftWorldManager
             
             worldDataFile.worldVersion = tbWorldVersion.Text; 
             worldDataFile.minecraftVersion = cbMcVersion.Text; 
+            worldDataFile.Description=tbDescription.Text;
             result = DialogResult.OK;
             this.Close();
         }

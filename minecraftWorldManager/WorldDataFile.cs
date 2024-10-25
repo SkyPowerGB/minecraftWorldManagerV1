@@ -9,7 +9,9 @@ namespace minecraftWorldManager
     public class WorldDataFile
     {
 
-        public WorldDataFile() { }
+        public WorldDataFile() {
+            this.marked = DateTime.Now;
+        }
         public WorldDataFile(string minecraftVersion, string worldVersion)
         {
             this.worldVersion = worldVersion;
@@ -17,7 +19,7 @@ namespace minecraftWorldManager
             this.marked = DateTime.Now;
 
         }
-
+        public string Description { get; set; }
         public string worldVersion;
         public string minecraftVersion;
         public DateTime? marked;

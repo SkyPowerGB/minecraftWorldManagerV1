@@ -69,7 +69,7 @@ namespace minecraftWorldManager
             cbDifficulty.SelectedItem = DifficultyMap[minecraftNBTmodel.GameDifficulty];
             chckBxCmdAllowed.Checked = minecraftNBTmodel.AllowCommands;
             chckBxDifficultyLock.Checked = minecraftNBTmodel.DifficultyLocked;
-            
+            lblVersion.Text=minecraftNBTmodel.WorldVersion;
             
            
             
@@ -131,9 +131,7 @@ namespace minecraftWorldManager
 
             return -1;
         }
-      
-     
+
         
-    
     }
 }

@@ -15,6 +15,7 @@ namespace minecraftWorldManager
     {
 
         private string inputName;
+        public bool RenameWorld {  get; set; }
         private DialogResult result;
 
         public InputForm()
@@ -33,11 +34,12 @@ namespace minecraftWorldManager
 
 
 
-        public string GetInput() {
+        public string GetNewName() {
             return inputName; }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+        { 
+            RenameWorld=chckBworldToo.Checked;
             inputName =tbNewName.Text;
             result = DialogResult.OK;
             this.Close();
@@ -46,6 +48,9 @@ namespace minecraftWorldManager
 
         public DialogResult GetResult() {   return result; }
 
+        public void SetInput(string input) {
+            tbNewName.Text = input;
+        }
         private void InputForm_Load(object sender, EventArgs e)
         {
             

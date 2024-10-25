@@ -19,11 +19,12 @@ namespace minecraftWorldManager
         private static string GetWorldDFfilePath(string worldPath) { return Path.Combine(worldPath, fileName); }
         public static void MarkWorld(String worldPath,WorldDataFile file) {
             if (IsMarked(worldPath)) { UpdateWorldDF(file, worldPath); return; }
-            MarkWorld(worldPath, file.minecraftVersion, file.worldVersion);
+            MarkWorld(worldPath, file.minecraftVersion, file.worldVersion,file.Description);
         }
-        public static void MarkWorld(String worldPath,String mCversion,String worldVersion ) {
+        public static void MarkWorld(String worldPath,String mCversion,String worldVersion,String description ) {
             if (IsMarked(worldPath)) { return; }
             WorldDataFile file = new WorldDataFile(mCversion,worldVersion);
+            file.Description = description;
             file.saveDate = DateTime.Now;
             String filePath=Path.Combine(worldPath,fileName);
              

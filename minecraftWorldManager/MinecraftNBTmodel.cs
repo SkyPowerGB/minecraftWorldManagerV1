@@ -16,5 +16,7 @@ namespace minecraftWorldManager
         public bool Hardcore { get; set; }
         public byte GameDifficulty { get; set; }
 
+        public string WorldVersion { get; set; }
+
     }
 }

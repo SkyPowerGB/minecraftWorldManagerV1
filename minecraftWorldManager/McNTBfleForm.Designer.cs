@@ -42,6 +42,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.cbDifficulty = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -171,11 +173,31 @@
             this.cbDifficulty.Size = new System.Drawing.Size(89, 21);
             this.cbDifficulty.TabIndex = 21;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Minecraft Version:";
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(155, 19);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(43, 13);
+            this.lblVersion.TabIndex = 24;
+            this.lblVersion.Text = "no data";
+            // 
             // EditWorldNBTform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(336, 311);
+            this.Controls.Add(this.lblVersion);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.cbDifficulty);
             this.Controls.Add(this.label7);
@@ -214,5 +236,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cbDifficulty;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblVersion;
     }
 }

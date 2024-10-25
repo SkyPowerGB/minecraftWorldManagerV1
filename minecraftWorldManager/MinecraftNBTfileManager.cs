@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace minecraftWorldManager
         private static string DifficultyLockedTagName = "DifficultyLocked";
         private static string DifficultyTagName = "Difficulty";
         private static string WorldNameTagName = "LevelName";
+        private static string WorldVersionTagName = "Name";
 
 
         public static MinecraftNBTmodel ReadMcNBTfile(string worldPath)
@@ -42,6 +44,20 @@ namespace minecraftWorldManager
 
                     NbtCompound rootTag = nbtFile.RootTag;
                     NbtCompound levelData = rootTag.Get<NbtCompound>("Data");
+
+
+                    NbtCompound VersionTag = levelData.Get<NbtCompound>("Version");
+                    if(VersionTag!= null)
+                    {
+                        if (VersionTag.Get(WorldVersionTagName) is NbtString versionString)
+                        {
+                            if (versionString.HasValue)
+                            {
+                                model.WorldVersion = versionString.Value;
+                            }
+                        }
+
+                    }
 
                     if (levelData != null)
                     {
@@ -119,7 +135,7 @@ namespace minecraftWorldManager
             {
                 NbtFile nbtFile = new NbtFile();
 
-                // Load the NBT file from the specified path
+                
                 using (FileStream fileStream = File.OpenRead(path))
                 {
                     nbtFile.LoadFromStream(fileStream, NbtCompression.AutoDetect);
@@ -128,6 +144,7 @@ namespace minecraftWorldManager
                 NbtCompound rootTag = nbtFile.RootTag;
                 NbtCompound levelData = rootTag.Get<NbtCompound>("Data");
 
+              
                 if (levelData != null)
                 {
                     // Update NBT tags
@@ -154,6 +171,14 @@ namespace minecraftWorldManager
             {
                 Console.WriteLine("An error occurred while updating the NBT file: " + ex.Message);
             }
+        }
+
+        public static void UpdateMcWorldName(string worldPath, string newWorldName) {
+            MinecraftNBTmodel model = ReadMcNBTfile(worldPath);
+            model.WorldName = newWorldName;
+            UpdateMcNBTfile(worldPath, model);
+
+
         }
 
         private static string getNbtFilePath(string worldPath) {
