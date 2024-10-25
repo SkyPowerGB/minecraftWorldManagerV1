@@ -596,7 +596,7 @@ namespace minecraftWorldManager
 
             
             var worldPath = Path.Combine(tbMcSavesLocPath.Text, item.ToString());
-            if (WorldDataFileWorker.IsMarked(worldPath)) { showErrorMsg("World not marked!"); return; }
+            if (!WorldDataFileWorker.IsMarked(worldPath)) { showErrorMsg("World not marked!"); return; }
             var dataFile=WorldDataFileWorker.GetWroldDF(worldPath);
             var dateTimeOffset = new DateTimeOffset(DateTime.Now);
 
