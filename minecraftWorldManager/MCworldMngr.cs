@@ -15,7 +15,7 @@ namespace minecraftWorldManager
     public partial class MCworldMngr : Form
     {
 
-        
+
         public MCworldMngr()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace minecraftWorldManager
         }
 
 
-       
+
         private void displayWorldData(WorldDataFile df)
         {
             rTbDisplayWFdata.Clear();
@@ -61,7 +61,8 @@ namespace minecraftWorldManager
 
         //rename
 
-        private void RenameWorld(string worldPath) {
+        private void RenameWorld(string worldPath)
+        {
             InputForm input;
             if (WorldDataFileWorker.IsBranch(worldPath))
             {
@@ -72,7 +73,7 @@ namespace minecraftWorldManager
                 input = new InputForm();
             }
             input.SetInput(Path.GetFileName(worldPath));
-            
+
             input.ShowDialog();
             var result = input.GetResult();
             if (DialogResult.OK != result)
@@ -80,12 +81,13 @@ namespace minecraftWorldManager
                 return;
             }
 
-            if (input.RenameWorld) {
+            if (input.RenameWorld)
+            {
 
-                MinecraftNBTfileManager.UpdateMcWorldName(worldPath,input.GetNewName());
+                MinecraftNBTfileManager.UpdateMcWorldName(worldPath, input.GetNewName());
             }
-           
-            
+
+
             string newName = input.GetNewName();
 
 
@@ -122,8 +124,8 @@ namespace minecraftWorldManager
             if (lbBranchContents.SelectedItem == null) { return false; }
             return true;
         }
-      
-  // GET PATHS      
+
+        // GET PATHS      
         public string getSelectedBackupPath()
         {
             if (lbBackups.SelectedItem == null) { return null; }
@@ -156,11 +158,11 @@ namespace minecraftWorldManager
 
 
         }
-/*----------------------------------------------------------------------------------------------------
- * 
- * REFRESH ALL LISTS
- 
- */
+        /*----------------------------------------------------------------------------------------------------
+         * 
+         * REFRESH ALL LISTS
+
+         */
 
         private void refreshLists()
         {
@@ -277,10 +279,10 @@ namespace minecraftWorldManager
             }
         }
 
-       
-/*---------------------------------------------------------------------------------------------------------------
- *       POPUP DIALOG
- */
+
+        /*---------------------------------------------------------------------------------------------------------------
+         *       POPUP DIALOG
+         */
 
         private void showErrorMsg(String error)
         {
@@ -299,11 +301,11 @@ namespace minecraftWorldManager
         }
 
 
-/*
- 
-  **********************************************************************************************
-  *EVENTS
- */
+        /*
+
+          **********************************************************************************************
+          *EVENTS
+         */
 
 
         private void button4_Click(object sender, EventArgs e)
@@ -339,7 +341,7 @@ namespace minecraftWorldManager
 
             ProgramDat data = new ProgramDat();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.SelectedPath=tbBackupsPath.Text;
+            folderBrowserDialog.SelectedPath = tbBackupsPath.Text;
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -365,7 +367,7 @@ namespace minecraftWorldManager
 
         }
 
-     
+
         private void btnSelectQbackupFolder_Click(object sender, EventArgs e)
         {
             ProgramDat dataFile = ProgDataFileMngr.GetProgramData();
@@ -378,14 +380,15 @@ namespace minecraftWorldManager
             if (result == DialogResult.OK)
             {
                 tbQbackupsLocPath.Text = folderBrowserDialog.SelectedPath;
-                var QbackupsPath= tbQbackupsLocPath.Text; 
-                if (tbQbackupsLocPath.Text == tbBackupsPath.Text) {
+                var QbackupsPath = tbQbackupsLocPath.Text;
+                if (tbQbackupsLocPath.Text == tbBackupsPath.Text)
+                {
                     string newDir = "Qbackups";
-                    string newPathQBdir = Path.Combine(QbackupsPath,newDir);
+                    string newPathQBdir = Path.Combine(QbackupsPath, newDir);
                     if (Directory.Exists(newPathQBdir)) { return; }
-                   Directory.CreateDirectory(newPathQBdir);
-                    QbackupsPath= newPathQBdir;
-                
+                    Directory.CreateDirectory(newPathQBdir);
+                    QbackupsPath = newPathQBdir;
+
                 }
 
                 data.quickBackupsPath = QbackupsPath;
@@ -409,7 +412,7 @@ namespace minecraftWorldManager
 
 
 
-        
+
         }
 
         private void btnOpenMarkForm_Click(object sender, EventArgs e)
@@ -423,7 +426,7 @@ namespace minecraftWorldManager
             string selectedWorld = lbMcWorlds.SelectedItem.ToString();
             string worldPath = Path.Combine(tbMcSavesLocPath.Text, selectedWorld);
 
-            WFeditor wFeditor=new WFeditor(worldPath);
+            WFeditor wFeditor = new WFeditor(worldPath);
 
 
             wFeditor.ShowDialog();
@@ -437,59 +440,62 @@ namespace minecraftWorldManager
         private void button1_Click(object sender, EventArgs e)
         {
             var item = lbMcWorlds.SelectedItem;
-            
-            if (item != null) {
-                McFileMngr.CreateBranch(item.ToString(),tbBackupsPath.Text);
+
+            if (item != null)
+            {
+                McFileMngr.CreateBranch(item.ToString(), tbBackupsPath.Text);
                 refreshLists();
             }
-            
+
         }
 
-    
+
         private void lbBackups_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-         
+
 
             tbBranch.Clear();
-            
-            if (!isBackupSelected()) {
+
+            if (!isBackupSelected())
+            {
                 return;
-            
-          
+
+
             }
 
-            var backupPath= getSelectedBackupPath();
+            var backupPath = getSelectedBackupPath();
             var worldDataFile = WorldDataFileWorker.GetWroldDF(backupPath);
 
             displayWorldData(worldDataFile);
 
-            if (!WorldDataFileWorker.IsBranch(backupPath)) {  return; }
+            if (!WorldDataFileWorker.IsBranch(backupPath)) { return; }
 
-          
+
 
             displayWorldData(worldDataFile);
 
-            var dirs=Directory.GetDirectories(backupPath);
+            var dirs = Directory.GetDirectories(backupPath);
 
             lbBranchContents.Items.Clear();
 
             tbBranch.Text = backupPath;
 
-            foreach (string dir in dirs) { 
-               
+            foreach (string dir in dirs)
+            {
+
                 lbBranchContents.Items.Add(Path.GetFileName(dir));
-            
+
             }
 
         }
 
         private void lbMcWorlds_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             if (lbMcWorlds.SelectedItem == null) { return; }
-            if (lbMcWorlds.SelectedItem.ToString() == null|| tbMcSavesLocPath.Text==null) { return; }
-          
+            if (lbMcWorlds.SelectedItem.ToString() == null || tbMcSavesLocPath.Text == null) { return; }
+
             displayWorldData(WorldDataFileWorker.GetWroldDF(Path.Combine(tbMcSavesLocPath.Text, lbMcWorlds.SelectedItem.ToString())));
 
 
@@ -499,18 +505,20 @@ namespace minecraftWorldManager
         {
             var save = lbMcWorlds.SelectedItem;
             if (save == null) { return; }
-            
 
-            string worldPath = Path.Combine(tbMcSavesLocPath.Text,save.ToString());
-            if (!WorldDataFileWorker.IsMarked(worldPath)) {
+
+            string worldPath = Path.Combine(tbMcSavesLocPath.Text, save.ToString());
+            if (!WorldDataFileWorker.IsMarked(worldPath))
+            {
                 showErrorMsg("File not marked");
-                return; }
+                return;
+            }
 
             string targetPath = tbBackupsPath.Text;
-                
-                
 
-            McFileMngr.CutWorldToRnm(worldPath,targetPath,null);
+
+
+            McFileMngr.CutWorldToRnm(worldPath, targetPath, null);
 
             LoadBackups();
             LoadSaves();
@@ -525,11 +533,11 @@ namespace minecraftWorldManager
 
             string worldPath = Path.Combine(tbBackupsPath.Text, save.ToString());
 
-            if (WorldDataFileWorker.IsBranch(worldPath)){ return; }
+            if (WorldDataFileWorker.IsBranch(worldPath)) { return; }
 
 
             string targetPath = tbMcSavesLocPath.Text;
-            McFileMngr.CutWorldToRnm(worldPath, targetPath,null);
+            McFileMngr.CutWorldToRnm(worldPath, targetPath, null);
             LoadSaves();
             LoadBackups();
 
@@ -539,22 +547,22 @@ namespace minecraftWorldManager
         private void btnCopyBckpToSaves_Click(object sender, EventArgs e)
         {
             var worldToCopy = lbBackups.SelectedItem;
-            if(worldToCopy == null) { return; };
-            var savesPath=tbMcSavesLocPath.Text;
-            var worldPath=Path.Combine(tbBackupsPath.Text,worldToCopy.ToString());
-            McFileMngr.CopyWorldTo(worldPath,savesPath,false);
+            if (worldToCopy == null) { return; };
+            var savesPath = tbMcSavesLocPath.Text;
+            var worldPath = Path.Combine(tbBackupsPath.Text, worldToCopy.ToString());
+            McFileMngr.CopyWorldTo(worldPath, savesPath, false);
             refreshLists();
         }
 
         private void btnCopySavesToBackup_Click(object sender, EventArgs e)
         {
-            
+
             var worldToCopy = lbMcWorlds.SelectedItem;
             if (worldToCopy == null) { return; };
             var backupsPath = tbBackupsPath.Text;
             var worldPath = Path.Combine(tbMcSavesLocPath.Text, worldToCopy.ToString());
-            if (!WorldDataFileWorker.IsMarked(worldPath)) { showErrorMsg("World isnt MARKED!"); return; } 
-            McFileMngr.CopyWorldTo(worldPath, backupsPath,false);
+            if (!WorldDataFileWorker.IsMarked(worldPath)) { showErrorMsg("World isnt MARKED!"); return; }
+            McFileMngr.CopyWorldTo(worldPath, backupsPath, false);
             refreshLists();
         }
 
@@ -563,9 +571,9 @@ namespace minecraftWorldManager
             var world = lbMcWorlds.SelectedItem;
             if (world == null) { return; }
 
-            ConfirmDelete(Path.Combine(tbMcSavesLocPath.Text,world.ToString()));
+            ConfirmDelete(Path.Combine(tbMcSavesLocPath.Text, world.ToString()));
         }
-      
+
         private void button8_Click(object sender, EventArgs e)
         {
             var world = lbBackups.SelectedItem;
@@ -578,9 +586,9 @@ namespace minecraftWorldManager
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            var item=lbMcWorlds.SelectedItem;
-            var branch=tbBranch.Text;
-            if (item == null||branch==null||branch==" ") { return; }
+            var item = lbMcWorlds.SelectedItem;
+            var branch = tbBranch.Text;
+            if (item == null || branch == null || branch == " ") { return; }
 
             var targetPath = Path.Combine(branch, item.ToString());
             var worldPath = Path.Combine(tbMcSavesLocPath.Text, item.ToString());
@@ -589,11 +597,11 @@ namespace minecraftWorldManager
             var dataFile = WorldDataFileWorker.GetWroldDF(worldPath);
             var dateTimeOffset = new DateTimeOffset(DateTime.Now);
 
-            var newName =  Path.GetFileName(worldPath)+  " d" +dateTimeOffset.ToUnixTimeSeconds().ToString();
+            var newName = Path.GetFileName(worldPath) + " d" + dateTimeOffset.ToUnixTimeSeconds().ToString();
 
 
 
-            McFileMngr.CopyWorldToRnm(worldPath, branch,newName,false);
+            McFileMngr.CopyWorldToRnm(worldPath, branch, newName, false);
             refreshLists();
         }
 
@@ -603,15 +611,15 @@ namespace minecraftWorldManager
             var branch = tbBranch.Text;
             if (item == null && branch == null && branch == " ") { return; }
 
-            
+
             var worldPath = Path.Combine(tbMcSavesLocPath.Text, item.ToString());
             if (!WorldDataFileWorker.IsMarked(worldPath)) { showErrorMsg("World not marked!"); return; }
-            var dataFile=WorldDataFileWorker.GetWroldDF(worldPath);
+            var dataFile = WorldDataFileWorker.GetWroldDF(worldPath);
             var dateTimeOffset = new DateTimeOffset(DateTime.Now);
 
             var newName = Path.GetFileName(worldPath) + " d" + dateTimeOffset.ToUnixTimeSeconds().ToString();
 
-            McFileMngr.CutWorldToRnm(worldPath, branch,newName);
+            McFileMngr.CutWorldToRnm(worldPath, branch, newName);
             refreshLists();
         }
 
@@ -624,7 +632,7 @@ namespace minecraftWorldManager
             var targetPath = tbMcSavesLocPath.Text;
             var worldPath = Path.Combine(branchPath, worldName.ToString());
 
-            Console.WriteLine("targer:" +targetPath);
+            Console.WriteLine("targer:" + targetPath);
             Console.WriteLine("world:" + worldPath);
 
             McFileMngr.CopyWorldTo(worldPath, targetPath, false);
@@ -643,20 +651,21 @@ namespace minecraftWorldManager
             Console.WriteLine("targer:" + targetPath);
             Console.WriteLine("world:" + worldPath);
 
-            McFileMngr.CutWorldToRnm(worldPath, targetPath,null);
+            McFileMngr.CutWorldToRnm(worldPath, targetPath, null);
             refreshLists();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            var item=lbBranchContents.SelectedItem;
+            var item = lbBranchContents.SelectedItem;
             var path = tbBranch.Text;
-            if (item == null || path == null ) {
+            if (item == null || path == null)
+            {
 
                 return;
             }
-           
-             
+
+
             ConfirmDelete(Path.Combine(path, item.ToString()));
             lbBranchContents.Items.Clear();
             tbBranch.Clear();
@@ -664,12 +673,13 @@ namespace minecraftWorldManager
 
         private void btnSelectSavesFold_Click(object sender, EventArgs e)
         {
-            
+
             FolderBrowserDialog ofd = new FolderBrowserDialog();
             ofd.SelectedPath = tbMcSavesLocPath.Text;
-           var result=ofd.ShowDialog();
-            if (DialogResult.OK ==result ) { 
-               tbMcSavesLocPath.Text = ofd.SelectedPath;
+            var result = ofd.ShowDialog();
+            if (DialogResult.OK == result)
+            {
+                tbMcSavesLocPath.Text = ofd.SelectedPath;
                 LoadSaves(false);
                 return;
             }
@@ -683,76 +693,79 @@ namespace minecraftWorldManager
         private void button10_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
-            var result=dialog.ShowDialog();
-            if (DialogResult.OK == result) { 
-            tbLocalWorldPath.Text = dialog.SelectedPath;
-            
+            var result = dialog.ShowDialog();
+            if (DialogResult.OK == result)
+            {
+                tbLocalWorldPath.Text = dialog.SelectedPath;
+
             }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-           
-                McFileMngr.CutWorldTo(
-                    tbLocalWorldPath.Text,
-                    Path.Combine(tbMcSavesLocPath.Text,Path.GetFileName(tbLocalWorldPath.Text)));
+
+            McFileMngr.CutWorldTo(
+                tbLocalWorldPath.Text,
+                Path.Combine(tbMcSavesLocPath.Text, Path.GetFileName(tbLocalWorldPath.Text)));
 
 
-            
+
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-           
+
             var selectedWorld = lbMcWorlds.SelectedItem;
 
-            if (!isSaveSelected()) {
+            if (!isSaveSelected())
+            {
                 showErrorMsg("no world selected");
                 return;
             }
-           
-        
-  
-          
+
+
+
+
             string worldPath = getSelectedSavePath();
 
             RenameWorld(worldPath);
-          
 
 
 
-            
+
+
         }
 
         private void btnQuickBackup_Click(object sender, EventArgs e)
         {
             var targetFolder = tbQbackupsLocPath.Text;
             if (targetFolder == null) { return; }
-            string worlds=tbMcSavesLocPath.Text;
-            if(worlds == null) { return; }
+            string worlds = tbMcSavesLocPath.Text;
+            if (worlds == null) { return; }
 
-            DateTimeOffset  offset=DateTimeOffset.Now;
+            DateTimeOffset offset = DateTimeOffset.Now;
 
-            var newFolderName=Path.GetFileName(worlds)+ " _DS" + offset.ToUnixTimeSeconds();
+            var newFolderName = Path.GetFileName(worlds) + " _DS" + offset.ToUnixTimeSeconds();
 
             var data = QbckpFileMngr.GetQuickBckpData();
-            if (data == null) {
+            if (data == null)
+            {
                 data = new QuickBackupsDat();
-              
+
                 QbckpFileMngr.UpdateQbckpData(data);
             }
 
-            
-         
-            McFileMngr.CopyWorldToRnm(worlds,tbQbackupsLocPath.Text,newFolderName,false);
-            refreshLists() ;
+
+
+            McFileMngr.CopyWorldToRnm(worlds, tbQbackupsLocPath.Text, newFolderName, false);
+            refreshLists();
         }
 
         private void btnQuickBackupImport_Click(object sender, EventArgs e)
         {
             var qbackup = lbQuickBackups.SelectedItem;
             var saves = tbMcSavesLocPath.Text;
-            if (qbackup==null)
+            if (qbackup == null)
             {
                 showErrorMsg("quick backup not selected");
                 return;
@@ -760,7 +773,7 @@ namespace minecraftWorldManager
             var qBackupPath = Path.Combine(tbQbackupsLocPath.Text, qbackup.ToString());
 
 
-            McFileMngr.CopyAllSubdirsTo(qBackupPath,saves);
+            McFileMngr.CopyAllSubdirsTo(qBackupPath, saves);
 
             refreshLists();
 
@@ -770,29 +783,29 @@ namespace minecraftWorldManager
         private void button6_Click_1(object sender, EventArgs e)
         {
             var qbPath = tbQbackupsLocPath.Text;
-            var qb=lbQuickBackups.SelectedItem;
+            var qb = lbQuickBackups.SelectedItem;
             if (qb == null) { return; }
             if (qbPath == null) { return; }
             var fileToDelete = Path.Combine(qbPath, qb.ToString());
             ConfirmDelete(fileToDelete);
             refreshLists();
         }
-       
+
         private void button13_Click(object sender, EventArgs e)
         {
 
-           
+
 
             if (!isBackupSelected())
             {
                 showErrorMsg("no world selected");
                 return;
             }
-           
+
 
 
             string worldPath = getSelectedBackupPath();
-            
+
 
             RenameWorld(worldPath);
 
@@ -802,7 +815,7 @@ namespace minecraftWorldManager
 
         private void lbQuickBackups_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!isQBackupSelected()) {return; }
+            if (!isQBackupSelected()) { return; }
             displayQbckpWorldsNames(getSelectedQBackupPath());
         }
 
@@ -826,23 +839,24 @@ namespace minecraftWorldManager
 
         private void btnEditMark_Click(object sender, EventArgs e)
         {
-            var selectedBackup=lbBackups.SelectedItem;
-            var backupsPath=tbBackupsPath.Text;
+            var selectedBackup = lbBackups.SelectedItem;
+            var backupsPath = tbBackupsPath.Text;
             if (selectedBackup == null || backupsPath == null) { return; }
-           var backupWorldPath= Path.Combine(backupsPath, selectedBackup.ToString());
+            var backupWorldPath = Path.Combine(backupsPath, selectedBackup.ToString());
             if (!WorldDataFileWorker.IsMarked(backupWorldPath)) { return; }
-           WorldDataFile worldDf= WorldDataFileWorker.GetWroldDF(backupWorldPath);
+              WorldDataFile worldDf = WorldDataFileWorker.GetWroldDF(backupWorldPath);
 
-            WFeditor editor=new WFeditor(worldDf);
-            editor.ShowDialog();
-            if (editor.result == DialogResult.OK) {
+               WFeditor editor = new WFeditor(worldDf, backupWorldPath);
+                editor.ShowDialog();
+            if (editor.result == DialogResult.OK)
+            {
 
-                WorldDataFileWorker.MarkWorld(backupWorldPath,editor.GetWorldDataFile());
-            
+                WorldDataFileWorker.MarkWorld(backupWorldPath, editor.GetWorldDataFile());
+
             }
-           
 
-           
+
+
         }
         private void lbBranchContents_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -866,8 +880,8 @@ namespace minecraftWorldManager
 
         private void button17_Click(object sender, EventArgs e)
         {
-        
-            if(!isBranchSelected()) { return; }
+
+            if (!isBranchSelected()) { return; }
             EditWorldNBTform form = new EditWorldNBTform(getSelectedBranchSavePath());
             form.ShowDialog();
         }
@@ -881,7 +895,7 @@ namespace minecraftWorldManager
         {
             McFileMngr.CopyWorldToRnm(
                 tbLocalWorldPath.Text,
-            tbMcSavesLocPath.Text,null,false);
+            tbMcSavesLocPath.Text, null, false);
             refreshLists();
         }
     }

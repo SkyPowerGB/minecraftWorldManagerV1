@@ -60,6 +60,7 @@
             "1.10",
             "1.11",
             "1.12",
+            "1.12.2",
             "1.13",
             "1.14",
             "1.15",
@@ -73,6 +74,7 @@
             this.cbMcVersion.Name = "cbMcVersion";
             this.cbMcVersion.Size = new System.Drawing.Size(207, 21);
             this.cbMcVersion.TabIndex = 1;
+            this.cbMcVersion.SelectedIndexChanged += new System.EventHandler(this.cbMcVersion_SelectedIndexChanged);
             // 
             // label1
             // 

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace minecraftWorldManager
@@ -13,6 +6,7 @@ namespace minecraftWorldManager
     public partial class WFeditor : Form
     {
         public WorldDataFile worldDataFile;
+        private String WorldPath {get;set;}
         public DialogResult result { get; private set; }
 
         public WFeditor()
@@ -23,9 +17,11 @@ namespace minecraftWorldManager
             loadData();
         }
 
-        public WFeditor(WorldDataFile worldDataFile)
+        public WFeditor(WorldDataFile worldDataFile,string worldPath)
         {
+            this.WorldPath = worldPath;
             InitializeComponent();
+            loadMcVersion(worldPath);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.worldDataFile = worldDataFile ?? new WorldDataFile(); 
             loadData();
@@ -34,18 +30,53 @@ namespace minecraftWorldManager
         public WFeditor(string worldPath)
         {
             InitializeComponent();
+            loadMcVersion(worldPath);
             this.StartPosition = FormStartPosition.CenterScreen;
-
+           MinecraftNBTmodel data;
             if (WorldDataFileWorker.IsMarked(worldPath))
             {
+                data = null;
                 this.worldDataFile = WorldDataFileWorker.GetWroldDF(worldPath);
             }
             else
             {
+                data = MinecraftNBTfileManager.ReadMcNBTfile(worldPath);
                 this.worldDataFile = new WorldDataFile(); 
             }
 
+            
+            if (data != null) {
+                cbMcVersion.Text = data.WorldVersion;
+            }
+
             loadData();
+        }
+
+
+        public void loadMcVersion(string worldPath) {
+            MinecraftNBTmodel data;
+            string worldVersion="";
+
+            if (WorldDataFileWorker.IsMarked(worldPath))
+            {
+                data = null;
+                worldVersion = WorldDataFileWorker.GetWroldDF(worldPath).worldVersion;
+                cbMcVersion.Text = worldVersion;
+            }
+            else
+            {
+                data = MinecraftNBTfileManager.ReadMcNBTfile(worldPath);
+                
+                worldVersion = data.WorldVersion;
+                cbMcVersion.Items.Add(worldVersion);
+                cbMcVersion.Text = worldVersion;
+
+            }
+
+             
+           
+
+           
         }
 
         private void loadData()
@@ -73,6 +104,11 @@ namespace minecraftWorldManager
         }
 
         private void WFeditor_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbMcVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
