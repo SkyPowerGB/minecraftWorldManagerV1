@@ -331,6 +331,7 @@ namespace minecraftWorldManager
 
             ProgramDat data = new ProgramDat();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.SelectedPath=tbBackupsPath.Text;
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -364,7 +365,7 @@ namespace minecraftWorldManager
 
             ProgramDat data = new ProgramDat();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-
+            folderBrowserDialog.SelectedPath = dataFile.quickBackupsPath;
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
