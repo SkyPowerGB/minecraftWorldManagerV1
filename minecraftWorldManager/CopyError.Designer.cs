@@ -30,8 +30,8 @@
         {
             this.rtbWorld1DatF = new System.Windows.Forms.RichTextBox();
             this.rtbWorld2DatF = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblWorld1 = new System.Windows.Forms.Label();
+            this.lblWorld2 = new System.Windows.Forms.Label();
             this.tbNewWorldName = new System.Windows.Forms.TextBox();
             this.btnRename = new System.Windows.Forms.Button();
             this.btnOverWrite = new System.Windows.Forms.Button();
@@ -54,23 +54,23 @@
             this.rtbWorld2DatF.TabIndex = 1;
             this.rtbWorld2DatF.Text = "";
             // 
-            // label1
+            // lblWorld1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 94);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "World 1:";
+            this.lblWorld1.AutoSize = true;
+            this.lblWorld1.Location = new System.Drawing.Point(38, 94);
+            this.lblWorld1.Name = "lblWorld1";
+            this.lblWorld1.Size = new System.Drawing.Size(47, 13);
+            this.lblWorld1.TabIndex = 2;
+            this.lblWorld1.Text = "World 1:";
             // 
-            // label2
+            // lblWorld2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(300, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "World 2:";
+            this.lblWorld2.AutoSize = true;
+            this.lblWorld2.Location = new System.Drawing.Point(300, 94);
+            this.lblWorld2.Name = "lblWorld2";
+            this.lblWorld2.Size = new System.Drawing.Size(47, 13);
+            this.lblWorld2.TabIndex = 3;
+            this.lblWorld2.Text = "World 2:";
             // 
             // tbNewWorldName
             // 
@@ -118,8 +118,8 @@
             this.Controls.Add(this.btnOverWrite);
             this.Controls.Add(this.btnRename);
             this.Controls.Add(this.tbNewWorldName);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblWorld2);
+            this.Controls.Add(this.lblWorld1);
             this.Controls.Add(this.rtbWorld2DatF);
             this.Controls.Add(this.rtbWorld1DatF);
             this.Name = "FolderExistsErrorForm";
@@ -134,8 +134,8 @@
 
         private System.Windows.Forms.RichTextBox rtbWorld1DatF;
         private System.Windows.Forms.RichTextBox rtbWorld2DatF;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblWorld1;
+        private System.Windows.Forms.Label lblWorld2;
         private System.Windows.Forms.TextBox tbNewWorldName;
         private System.Windows.Forms.Button btnRename;
         private System.Windows.Forms.Button btnOverWrite;

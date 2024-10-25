@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,22 +17,25 @@ namespace minecraftWorldManager
         public static int OVERWRITE = 2;
         public static int CANCEL = 3;
       
-        public int result;
-        public string NewName { get; set; }
+        public int Result { get; set; }
+        public string NewName { get;
+
+            set;   }
      
     
         public FolderExistsErrorForm(string filePath,string targetFilePath)
         {
             InitializeComponent();
+            this.tbNewWorldName.Text = Path.GetFileName(filePath);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.result = CANCEL;
+            this.Result = CANCEL;
            
             WorldDataFile worldDataFile = WorldDataFileWorker.GetWroldDF(filePath);
             WorldDataFile targetWorldDataFile = WorldDataFileWorker.GetWroldDF(targetFilePath);
             if (worldDataFile != null&&targetWorldDataFile!=null) {
 
 
-                rtbWorld1DatF.Text +="Last modified:"+ worldDataFile.saveDate+Environment.NewLine;
+                rtbWorld1DatF.Text +="Last modified stamp:"+ worldDataFile.saveDate+Environment.NewLine;
                 rtbWorld1DatF.Text +=  Environment.NewLine;
 
                 rtbWorld1DatF.Text += "World Version:" + worldDataFile.worldVersion + Environment.NewLine;
@@ -63,7 +67,7 @@ namespace minecraftWorldManager
 
         private void btnRename_Click(object sender, EventArgs e)
         {
-            result = RENAME;
+            Result = RENAME;
             if (tbNewWorldName.Text == ""||tbNewWorldName.Text==" ") { return; }
             NewName = tbNewWorldName.Text;
            
@@ -72,18 +76,17 @@ namespace minecraftWorldManager
 
         private void btnOverWrite_Click(object sender, EventArgs e)
         {
-            result=OVERWRITE;
+            Result=OVERWRITE;
             this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            result = CANCEL;
+            Result = CANCEL;
             this.Close();
         }
 
-     
-
+       
 
 
 

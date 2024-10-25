@@ -34,12 +34,16 @@ namespace minecraftWorldManager
           
             if (Directory.Exists(newWorldPath)){ 
                 FolderExistsErrorForm folderExistsDialog=new FolderExistsErrorForm(worldPath,newWorldPath);
+             
                 folderExistsDialog.ShowDialog();
-                if (folderExistsDialog.result == FolderExistsErrorForm.CANCEL) { return; }
-                else if (folderExistsDialog.result == FolderExistsErrorForm.OVERWRITE) { }
-                else if (folderExistsDialog.result == FolderExistsErrorForm.RENAME)
+              
+
+                if (folderExistsDialog.Result == FolderExistsErrorForm.CANCEL) { return; }
+                else if (folderExistsDialog.Result == FolderExistsErrorForm.OVERWRITE) { }
+                else if (folderExistsDialog.Result == FolderExistsErrorForm.RENAME)
                 {
-                    CopyWorldToRnm(worldPath,targetDir,folderExistsDialog.NewName,false);
+                   
+                    CopyWorldToRnm(worldPath,targetDir,folderExistsDialog.NewName,delete);
 
                     return;
                 }
@@ -104,8 +108,11 @@ namespace minecraftWorldManager
                 }
             } else if (Directory.Exists(targetDirPath)&&!overWrite) {
                 FolderExistsErrorForm folderExists = new FolderExistsErrorForm(worldPath,targetDirPath);
+
+               
+
                 folderExists.ShowDialog();
-                var result=folderExists.result;
+                var result=folderExists.Result;
                 if (result == FolderExistsErrorForm.RENAME)
                 {
                     targetDirPath = Path.Combine(targetBasePath, folderExists.NewName);
@@ -161,18 +168,23 @@ namespace minecraftWorldManager
                 {
                    
 
-                    FolderExistsErrorForm folderExists = new FolderExistsErrorForm(worldPath, worldPathNew);
-                    folderExists.ShowDialog();
-                    if (folderExists.result == FolderExistsErrorForm.RENAME)
+                    FolderExistsErrorForm folderExistsform = new FolderExistsErrorForm(worldPath, worldPathNew);
+                   
+                    folderExistsform.ShowDialog();
+                   
+                  
+                    if (folderExistsform.Result == FolderExistsErrorForm.RENAME)
                     {
-
+                        Console.WriteLine("rename then cut");
                         var targetParent = Path.GetDirectoryName(worldPathNew);
-                        var newTargetPath = Path.Combine(targetParent, folderExists.NewName);
-                        CutWorldTo(worldPath, newTargetPath);
+                        var renamedWorldPathNew = Path.Combine(targetParent, folderExistsform.NewName);
+                        Console.WriteLine($" new world path {renamedWorldPathNew} , old path{worldPath}");
+                        CopyWorldTo(worldPath, Path.GetDirectoryName(renamedWorldPathNew));
+                        Directory.Delete(worldPath, true);
+
+                    } else if (folderExistsform.Result == FolderExistsErrorForm.OVERWRITE ) {
 
 
-                    } else if (
-                        folderExists.result == FolderExistsErrorForm.OVERWRITE ) {
                         CopyWorldTo(worldPath,Path.GetDirectoryName(worldPathNew));
                         Directory.Delete(worldPath,true);
                     }
