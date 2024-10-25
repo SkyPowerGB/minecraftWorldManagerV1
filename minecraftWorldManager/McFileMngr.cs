@@ -249,8 +249,11 @@ namespace minecraftWorldManager
 
             var dirs=Directory.GetDirectories(sourceDirPath);
             foreach (var dir in dirs) {
-                Console.WriteLine("try copy" + dir);
-                CopyWorldTo(dir, destinationPath,false);
+                
+                if (!WorldDataFileWorker.IsBranch(dir))
+                {
+                    CopyWorldTo(dir, destinationPath, false);
+                }
             
             }
 

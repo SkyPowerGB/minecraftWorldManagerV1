@@ -25,6 +25,13 @@ namespace minecraftWorldManager
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
+
+        public InputForm(bool hideChckBox) {
+            InitializeComponent();
+            if (hideChckBox) { 
+            chckBworldToo.Visible = false;
+            }
+        }
         private void button2_Click(object sender, EventArgs e)
 
         {

@@ -62,9 +62,17 @@ namespace minecraftWorldManager
         //rename
 
         private void RenameWorld(string worldPath) {
-            InputForm input = new InputForm();
-            
+            InputForm input;
+            if (WorldDataFileWorker.IsBranch(worldPath))
+            {
+                input = new InputForm(true);
+            }
+            else
+            {
+                input = new InputForm();
+            }
             input.SetInput(Path.GetFileName(worldPath));
+            
             input.ShowDialog();
             var result = input.GetResult();
             if (DialogResult.OK != result)
