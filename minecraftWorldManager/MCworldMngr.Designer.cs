@@ -68,6 +68,9 @@
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.btnCopyToSaves = new System.Windows.Forms.Button();
+            this.chckOnlyBranches = new System.Windows.Forms.CheckBox();
+            this.chckShowWorlds = new System.Windows.Forms.CheckBox();
+            this.chckShowUnmarked = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lbMcWorlds
@@ -106,6 +109,7 @@
             this.tbBackupsPath.Name = "tbBackupsPath";
             this.tbBackupsPath.Size = new System.Drawing.Size(241, 20);
             this.tbBackupsPath.TabIndex = 7;
+            this.tbBackupsPath.TextChanged += new System.EventHandler(this.tbBackupsPath_TextChanged);
             // 
             // tbMcSavesLocPath
             // 
@@ -457,11 +461,51 @@
             this.btnCopyToSaves.UseVisualStyleBackColor = true;
             this.btnCopyToSaves.Click += new System.EventHandler(this.btnCopyToSaves_Click);
             // 
+            // chckOnlyBranches
+            // 
+            this.chckOnlyBranches.AutoSize = true;
+            this.chckOnlyBranches.Checked = true;
+            this.chckOnlyBranches.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckOnlyBranches.Location = new System.Drawing.Point(350, 66);
+            this.chckOnlyBranches.Name = "chckOnlyBranches";
+            this.chckOnlyBranches.Size = new System.Drawing.Size(96, 17);
+            this.chckOnlyBranches.TabIndex = 78;
+            this.chckOnlyBranches.Text = "showBranches";
+            this.chckOnlyBranches.UseVisualStyleBackColor = true;
+            this.chckOnlyBranches.CheckedChanged += new System.EventHandler(this.chckOnlyBranches_CheckedChanged);
+            // 
+            // chckShowWorlds
+            // 
+            this.chckShowWorlds.AutoSize = true;
+            this.chckShowWorlds.Checked = true;
+            this.chckShowWorlds.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckShowWorlds.Location = new System.Drawing.Point(452, 66);
+            this.chckShowWorlds.Name = "chckShowWorlds";
+            this.chckShowWorlds.Size = new System.Drawing.Size(84, 17);
+            this.chckShowWorlds.TabIndex = 79;
+            this.chckShowWorlds.Text = "showWorlds";
+            this.chckShowWorlds.UseVisualStyleBackColor = true;
+            this.chckShowWorlds.CheckedChanged += new System.EventHandler(this.chckShowWorlds_CheckedChanged);
+            // 
+            // chckShowUnmarked
+            // 
+            this.chckShowUnmarked.AutoSize = true;
+            this.chckShowUnmarked.Location = new System.Drawing.Point(542, 67);
+            this.chckShowUnmarked.Name = "chckShowUnmarked";
+            this.chckShowUnmarked.Size = new System.Drawing.Size(101, 17);
+            this.chckShowUnmarked.TabIndex = 80;
+            this.chckShowUnmarked.Text = "showUnMarked";
+            this.chckShowUnmarked.UseVisualStyleBackColor = true;
+            this.chckShowUnmarked.CheckedChanged += new System.EventHandler(this.chckShowUnmarked_CheckedChanged);
+            // 
             // MCworldMngr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 723);
+            this.Controls.Add(this.chckShowUnmarked);
+            this.Controls.Add(this.chckShowWorlds);
+            this.Controls.Add(this.chckOnlyBranches);
             this.Controls.Add(this.btnCopyToSaves);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
@@ -552,6 +596,9 @@
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button btnCopyToSaves;
+        private System.Windows.Forms.CheckBox chckOnlyBranches;
+        private System.Windows.Forms.CheckBox chckShowWorlds;
+        private System.Windows.Forms.CheckBox chckShowUnmarked;
     }
 }
 
