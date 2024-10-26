@@ -255,8 +255,17 @@ namespace minecraftWorldManager
                         WorldDataFileWorker.IsBranch(dir)&&chckOnlyBranches.Checked || chckShowUnmarked.Checked)
                     {
                         string name = Path.GetFileName(dir);
-                        lbBackups.Items.Add(name);
+                        if (tbShearch.Text != null && tbShearch.Text != "")
+                        {
+                            if (name.Contains(tbShearch.Text))
+                            {
+                                lbBackups.Items.Add(name);
+                            }
+                        }
+                        else {
 
+                            lbBackups.Items.Add(name);
+                        }
                     }
 
                 }
@@ -940,6 +949,19 @@ namespace minecraftWorldManager
         }
 
         private void chckShowUnmarked_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshLists();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (tbShearch.Text != "") { 
+            refreshLists();
+            }
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
             refreshLists();
         }
