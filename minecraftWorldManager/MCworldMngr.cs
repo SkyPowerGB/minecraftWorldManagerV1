@@ -23,6 +23,7 @@ namespace minecraftWorldManager
             InitializeComponent();
             LoadSaves();
             LoadBackups();
+            LoadAllVersionsCombo();
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
@@ -30,8 +31,6 @@ namespace minecraftWorldManager
         {
             this.StartPosition = FormStartPosition.CenterScreen;
         }
-
-
 
         private void displayWorldData(WorldDataFile df)
         {
@@ -177,7 +176,7 @@ namespace minecraftWorldManager
             LoadSaves();
             LoadBackups();
             LoadQsaves();
-           lbBranchContents.Items.Clear();  
+            lbBranchContents.Items.Clear();
         }
 
 
@@ -252,13 +251,13 @@ namespace minecraftWorldManager
 
                 foreach (String dir in backupsDirs)
                 {
-                    if (WorldDataFileWorker.IsMarked(dir)&&chckShowWorlds.Checked || 
-                        WorldDataFileWorker.IsBranch(dir)&&chckOnlyBranches.Checked || chckShowUnmarked.Checked)
+                    if (WorldDataFileWorker.IsMarked(dir) && chckShowWorlds.Checked ||
+                        WorldDataFileWorker.IsBranch(dir) && chckOnlyBranches.Checked || chckShowUnmarked.Checked)
                     {
                         string name = Path.GetFileName(dir);
                         if (tbShearch.Text != null && tbShearch.Text != "")
                         {
-                            if (name.Contains(tbShearch.Text))
+                            if ((name).ToLower().Contains(tbShearch.Text))
                             {
                                 lbBackups.Items.Add(name);
                             }
@@ -267,6 +266,11 @@ namespace minecraftWorldManager
 
                             lbBackups.Items.Add(name);
                         }
+
+                     
+
+
+
                     }
 
                 }
@@ -289,20 +293,22 @@ namespace minecraftWorldManager
             }
             catch (Exception e) { }
 
-        
-    
 
 
 
-           
+
+
+
         }
-
+       
+        
+        
         private void LoadQsaves()
         {
             lbQuickBackups.Items.Clear();
             var path = tbQbackupsLocPath.Text;
-            if (path == null||path=="") { return; }
-            if(!Directory.Exists(path)) { return; }
+            if (path == null || path == "") { return; }
+            if (!Directory.Exists(path)) { return; }
             var dirs = Directory.GetDirectories(path);
             foreach (string dir in dirs)
             {
@@ -311,6 +317,9 @@ namespace minecraftWorldManager
 
             }
         }
+
+
+
 
 
         /*---------------------------------------------------------------------------------------------------------------
@@ -327,7 +336,7 @@ namespace minecraftWorldManager
             DialogResult result = MessageBox.Show("Are you sure you want to delete this world?", "Confirm DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-               DeleteWorld(worldPath);
+                DeleteWorld(worldPath);
                 refreshLists();
             }
 
@@ -355,6 +364,71 @@ namespace minecraftWorldManager
             }
         }
 
+
+        /*---------------------------------------------------------------------------------------------------------------
+      *     GET ALL VERSIONS:
+      
+      */
+
+
+
+        private void LoadAllVersionsCombo()
+        {
+
+            List<string> versionLists = new List<string>();
+            if (!versionLists.Contains("all")) { versionLists.Add("all"); }
+            versionLists = getAllversions(tbMcSavesLocPath.Text,versionLists);
+            versionLists = getAllversions(tbBackupsPath.Text, versionLists);
+            cbVersionFilter.DataSource= versionLists;
+        }
+
+        private List<string> getAllversions(string worldsFolderPath,List<string> versions){
+
+            if (worldsFolderPath == "" || worldsFolderPath == null||!Directory.Exists(worldsFolderPath)) { return versions; }
+
+            var worlds=Directory.GetDirectories(worldsFolderPath);
+          
+
+            foreach ( var dir in worlds)
+            {
+
+                var version = getWorldVersion(dir, versions);
+                if (!versions.Contains(version)) { 
+                versions.Add(version);
+                }
+            }
+        
+            return versions;
+        }
+
+        private string getWorldVersion(string worldPath, List<string> versions)
+        {
+            string output = "uknown";
+
+            if (WorldDataFileWorker.IsBranch(worldPath)) { getAllversions(worldPath,versions);  return output; }
+
+
+            if (WorldDataFileWorker.IsMarked(worldPath))
+            {
+                var data = WorldDataFileWorker.GetWroldDF(worldPath);
+                output = data.worldVersion;
+
+            }
+
+
+            var model=MinecraftNBTfileManager.ReadMcNBTfile(worldPath);
+            if (model != null)
+            {
+                output = model.WorldVersion;
+            }
+           
+
+            return output;
+        }
+
+
+
+    
 
         /*
 
@@ -989,12 +1063,10 @@ namespace minecraftWorldManager
             refreshLists();
         }
 
-
-
-
-
-     
-
+        private void cbVersionFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            refreshLists();
+        }
     }
 
 
