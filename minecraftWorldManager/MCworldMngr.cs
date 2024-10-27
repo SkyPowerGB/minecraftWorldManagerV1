@@ -333,6 +333,28 @@ namespace minecraftWorldManager
 
         }
 
+        static bool DeleteWorld(string directoryPath)
+        {
+            try
+            {
+
+                if (!System.IO.Directory.Exists(directoryPath))
+                {
+                    Console.WriteLine($"Directory does not exist: {directoryPath}");
+                    return false;
+                }
+
+
+                FileSystem.DeleteDirectory(directoryPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return false;
+            }
+        }
+
 
         /*
 
@@ -971,28 +993,7 @@ namespace minecraftWorldManager
 
 
 
-        static bool DeleteWorld(string directoryPath)
-        {
-            try
-            {
-             
-                if (!System.IO.Directory.Exists(directoryPath))
-                {
-                    Console.WriteLine($"Directory does not exist: {directoryPath}");
-                    return false;
-                }
-
-               
-                FileSystem.DeleteDirectory(directoryPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                return false;
-            }
-        }
-
+     
 
     }
 
