@@ -66,9 +66,12 @@ namespace minecraftWorldManager
             else
             {
                 data = MinecraftNBTfileManager.ReadMcNBTfile(worldPath);
-                
+                worldVersion = "";
                 worldVersion = data.WorldVersion;
-                cbMcVersion.Items.Add(worldVersion);
+                if (worldVersion != null)
+                {
+                    cbMcVersion.Items.Add(worldVersion);
+                }
                 cbMcVersion.Text = worldVersion;
 
             }
