@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -326,7 +327,7 @@ namespace minecraftWorldManager
             DialogResult result = MessageBox.Show("Are you sure you want to delete this world?", "Confirm DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                Directory.Delete(worldPath, true);
+               DeleteWorld(worldPath);
                 refreshLists();
             }
 
@@ -965,7 +966,39 @@ namespace minecraftWorldManager
         {
             refreshLists();
         }
+
+
+
+
+
+        static bool DeleteWorld(string directoryPath)
+        {
+            try
+            {
+             
+                if (!System.IO.Directory.Exists(directoryPath))
+                {
+                    Console.WriteLine($"Directory does not exist: {directoryPath}");
+                    return false;
+                }
+
+               
+                FileSystem.DeleteDirectory(directoryPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return false;
+            }
+        }
+
+
     }
+
+
+
+
 
 
 }
