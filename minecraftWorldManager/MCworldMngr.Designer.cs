@@ -74,6 +74,10 @@
             this.tbShearch = new System.Windows.Forms.TextBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.cbVersionFilter = new System.Windows.Forms.ComboBox();
+            this.btnReloadVersions = new System.Windows.Forms.Button();
+            this.lbQbackupsContents = new System.Windows.Forms.ListBox();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbMcWorlds
@@ -89,10 +93,10 @@
             // lbBackups
             // 
             this.lbBackups.FormattingEnabled = true;
-            this.lbBackups.Location = new System.Drawing.Point(352, 194);
+            this.lbBackups.Location = new System.Drawing.Point(395, 198);
             this.lbBackups.Name = "lbBackups";
             this.lbBackups.ScrollAlwaysVisible = true;
-            this.lbBackups.Size = new System.Drawing.Size(293, 225);
+            this.lbBackups.Size = new System.Drawing.Size(221, 225);
             this.lbBackups.TabIndex = 1;
             this.lbBackups.SelectedIndexChanged += new System.EventHandler(this.lbBackups_SelectedIndexChanged);
             // 
@@ -108,9 +112,9 @@
             // 
             // tbBackupsPath
             // 
-            this.tbBackupsPath.Location = new System.Drawing.Point(351, 167);
+            this.tbBackupsPath.Location = new System.Drawing.Point(394, 171);
             this.tbBackupsPath.Name = "tbBackupsPath";
-            this.tbBackupsPath.Size = new System.Drawing.Size(241, 20);
+            this.tbBackupsPath.Size = new System.Drawing.Size(169, 20);
             this.tbBackupsPath.TabIndex = 7;
             this.tbBackupsPath.TextChanged += new System.EventHandler(this.tbBackupsPath_TextChanged);
             // 
@@ -124,7 +128,7 @@
             // 
             // btnSelectBackups
             // 
-            this.btnSelectBackups.Location = new System.Drawing.Point(597, 167);
+            this.btnSelectBackups.Location = new System.Drawing.Point(569, 171);
             this.btnSelectBackups.Name = "btnSelectBackups";
             this.btnSelectBackups.Size = new System.Drawing.Size(47, 20);
             this.btnSelectBackups.TabIndex = 31;
@@ -134,9 +138,9 @@
             // 
             // btnCutSavesToBackups
             // 
-            this.btnCutSavesToBackups.Location = new System.Drawing.Point(305, 213);
+            this.btnCutSavesToBackups.Location = new System.Drawing.Point(303, 198);
             this.btnCutSavesToBackups.Name = "btnCutSavesToBackups";
-            this.btnCutSavesToBackups.Size = new System.Drawing.Size(41, 41);
+            this.btnCutSavesToBackups.Size = new System.Drawing.Size(85, 36);
             this.btnCutSavesToBackups.TabIndex = 32;
             this.btnCutSavesToBackups.Text = ">";
             this.btnCutSavesToBackups.UseVisualStyleBackColor = true;
@@ -144,9 +148,9 @@
             // 
             // btnCutBckpToSaves
             // 
-            this.btnCutBckpToSaves.Location = new System.Drawing.Point(305, 260);
+            this.btnCutBckpToSaves.Location = new System.Drawing.Point(304, 240);
             this.btnCutBckpToSaves.Name = "btnCutBckpToSaves";
-            this.btnCutBckpToSaves.Size = new System.Drawing.Size(41, 41);
+            this.btnCutBckpToSaves.Size = new System.Drawing.Size(85, 36);
             this.btnCutBckpToSaves.TabIndex = 33;
             this.btnCutBckpToSaves.Text = "<";
             this.btnCutBckpToSaves.UseVisualStyleBackColor = true;
@@ -154,9 +158,9 @@
             // 
             // btnCopyBckpToSaves
             // 
-            this.btnCopyBckpToSaves.Location = new System.Drawing.Point(305, 354);
+            this.btnCopyBckpToSaves.Location = new System.Drawing.Point(304, 324);
             this.btnCopyBckpToSaves.Name = "btnCopyBckpToSaves";
-            this.btnCopyBckpToSaves.Size = new System.Drawing.Size(41, 41);
+            this.btnCopyBckpToSaves.Size = new System.Drawing.Size(84, 36);
             this.btnCopyBckpToSaves.TabIndex = 34;
             this.btnCopyBckpToSaves.Text = "<<";
             this.btnCopyBckpToSaves.UseVisualStyleBackColor = true;
@@ -164,9 +168,9 @@
             // 
             // btnCopySavesToBackup
             // 
-            this.btnCopySavesToBackup.Location = new System.Drawing.Point(305, 307);
+            this.btnCopySavesToBackup.Location = new System.Drawing.Point(304, 282);
             this.btnCopySavesToBackup.Name = "btnCopySavesToBackup";
-            this.btnCopySavesToBackup.Size = new System.Drawing.Size(41, 41);
+            this.btnCopySavesToBackup.Size = new System.Drawing.Size(84, 36);
             this.btnCopySavesToBackup.TabIndex = 35;
             this.btnCopySavesToBackup.Text = ">>";
             this.btnCopySavesToBackup.UseVisualStyleBackColor = true;
@@ -212,9 +216,9 @@
             // rTbDisplayWFdata
             // 
             this.rTbDisplayWFdata.Cursor = System.Windows.Forms.Cursors.Help;
-            this.rTbDisplayWFdata.Location = new System.Drawing.Point(363, 487);
+            this.rTbDisplayWFdata.Location = new System.Drawing.Point(542, 488);
             this.rTbDisplayWFdata.Name = "rTbDisplayWFdata";
-            this.rTbDisplayWFdata.Size = new System.Drawing.Size(282, 176);
+            this.rTbDisplayWFdata.Size = new System.Drawing.Size(193, 199);
             this.rTbDisplayWFdata.TabIndex = 52;
             this.rTbDisplayWFdata.Text = "";
             this.rTbDisplayWFdata.TextChanged += new System.EventHandler(this.rTbDisplayWFdata_TextChanged);
@@ -232,18 +236,18 @@
             // lbBranchContents
             // 
             this.lbBranchContents.FormattingEnabled = true;
-            this.lbBranchContents.Location = new System.Drawing.Point(672, 192);
+            this.lbBranchContents.Location = new System.Drawing.Point(622, 198);
             this.lbBranchContents.Name = "lbBranchContents";
             this.lbBranchContents.ScrollAlwaysVisible = true;
-            this.lbBranchContents.Size = new System.Drawing.Size(293, 225);
+            this.lbBranchContents.Size = new System.Drawing.Size(218, 225);
             this.lbBranchContents.TabIndex = 54;
             this.lbBranchContents.SelectedIndexChanged += new System.EventHandler(this.lbBranchContents_SelectedIndexChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(350, 12);
+            this.button1.Location = new System.Drawing.Point(12, 425);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 40);
+            this.button1.Size = new System.Drawing.Size(95, 22);
             this.button1.TabIndex = 55;
             this.button1.Text = "Create Branch";
             this.button1.UseVisualStyleBackColor = true;
@@ -251,9 +255,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 425);
+            this.button2.Location = new System.Drawing.Point(304, 395);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 23);
+            this.button2.Size = new System.Drawing.Size(84, 23);
             this.button2.TabIndex = 56;
             this.button2.Text = "CopyToBranch";
             this.button2.UseVisualStyleBackColor = true;
@@ -261,9 +265,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 454);
+            this.button3.Location = new System.Drawing.Point(304, 366);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 23);
+            this.button3.Size = new System.Drawing.Size(85, 23);
             this.button3.TabIndex = 57;
             this.button3.Text = "CutToBranch";
             this.button3.UseVisualStyleBackColor = true;
@@ -271,9 +275,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(773, 12);
+            this.button4.Location = new System.Drawing.Point(846, 244);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(95, 40);
+            this.button4.Size = new System.Drawing.Size(85, 40);
             this.button4.TabIndex = 59;
             this.button4.Text = "Cut to saves";
             this.button4.UseVisualStyleBackColor = true;
@@ -281,9 +285,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(672, 12);
+            this.button5.Location = new System.Drawing.Point(846, 198);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(95, 40);
+            this.button5.Size = new System.Drawing.Size(85, 40);
             this.button5.TabIndex = 58;
             this.button5.Text = "Copy To Saves";
             this.button5.UseVisualStyleBackColor = true;
@@ -301,9 +305,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(549, 426);
+            this.button8.Location = new System.Drawing.Point(544, 430);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(95, 22);
+            this.button8.Size = new System.Drawing.Size(72, 22);
             this.button8.TabIndex = 62;
             this.button8.Text = "Delete";
             this.button8.UseVisualStyleBackColor = true;
@@ -311,7 +315,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(870, 423);
+            this.button9.Location = new System.Drawing.Point(745, 429);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(95, 22);
             this.button9.TabIndex = 63;
@@ -331,9 +335,9 @@
             // 
             // btnEditMark
             // 
-            this.btnEditMark.Location = new System.Drawing.Point(447, 12);
+            this.btnEditMark.Location = new System.Drawing.Point(454, 12);
             this.btnEditMark.Name = "btnEditMark";
-            this.btnEditMark.Size = new System.Drawing.Size(95, 40);
+            this.btnEditMark.Size = new System.Drawing.Size(87, 40);
             this.btnEditMark.TabIndex = 39;
             this.btnEditMark.Text = "WF editor";
             this.btnEditMark.UseVisualStyleBackColor = true;
@@ -351,10 +355,10 @@
             // 
             // tbBranch
             // 
-            this.tbBranch.Location = new System.Drawing.Point(672, 166);
+            this.tbBranch.Location = new System.Drawing.Point(622, 172);
             this.tbBranch.Name = "tbBranch";
             this.tbBranch.ReadOnly = true;
-            this.tbBranch.Size = new System.Drawing.Size(293, 20);
+            this.tbBranch.Size = new System.Drawing.Size(218, 20);
             this.tbBranch.TabIndex = 65;
             // 
             // tbLocalWorldPath
@@ -406,9 +410,9 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(874, 12);
+            this.button14.Location = new System.Drawing.Point(846, 290);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(95, 40);
+            this.button14.Size = new System.Drawing.Size(85, 40);
             this.button14.TabIndex = 72;
             this.button14.Text = "Rename";
             this.button14.UseVisualStyleBackColor = true;
@@ -436,9 +440,9 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(460, 426);
+            this.button16.Location = new System.Drawing.Point(478, 429);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(83, 23);
+            this.button16.Size = new System.Drawing.Size(60, 23);
             this.button16.TabIndex = 75;
             this.button16.Text = "EditNBT";
             this.button16.UseVisualStyleBackColor = true;
@@ -446,7 +450,7 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(785, 423);
+            this.button17.Location = new System.Drawing.Point(660, 429);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(83, 23);
             this.button17.TabIndex = 76;
@@ -469,7 +473,7 @@
             this.chckOnlyBranches.AutoSize = true;
             this.chckOnlyBranches.Checked = true;
             this.chckOnlyBranches.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chckOnlyBranches.Location = new System.Drawing.Point(350, 144);
+            this.chckOnlyBranches.Location = new System.Drawing.Point(352, 105);
             this.chckOnlyBranches.Name = "chckOnlyBranches";
             this.chckOnlyBranches.Size = new System.Drawing.Size(96, 17);
             this.chckOnlyBranches.TabIndex = 78;
@@ -482,7 +486,7 @@
             this.chckShowWorlds.AutoSize = true;
             this.chckShowWorlds.Checked = true;
             this.chckShowWorlds.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chckShowWorlds.Location = new System.Drawing.Point(452, 144);
+            this.chckShowWorlds.Location = new System.Drawing.Point(454, 105);
             this.chckShowWorlds.Name = "chckShowWorlds";
             this.chckShowWorlds.Size = new System.Drawing.Size(84, 17);
             this.chckShowWorlds.TabIndex = 79;
@@ -493,7 +497,7 @@
             // chckShowUnmarked
             // 
             this.chckShowUnmarked.AutoSize = true;
-            this.chckShowUnmarked.Location = new System.Drawing.Point(542, 145);
+            this.chckShowUnmarked.Location = new System.Drawing.Point(543, 105);
             this.chckShowUnmarked.Name = "chckShowUnmarked";
             this.chckShowUnmarked.Size = new System.Drawing.Size(101, 17);
             this.chckShowUnmarked.TabIndex = 80;
@@ -528,11 +532,54 @@
             this.cbVersionFilter.TabIndex = 83;
             this.cbVersionFilter.SelectedIndexChanged += new System.EventHandler(this.cbVersionFilter_SelectedIndexChanged);
             // 
+            // btnReloadVersions
+            // 
+            this.btnReloadVersions.Location = new System.Drawing.Point(171, 79);
+            this.btnReloadVersions.Name = "btnReloadVersions";
+            this.btnReloadVersions.Size = new System.Drawing.Size(67, 20);
+            this.btnReloadVersions.TabIndex = 84;
+            this.btnReloadVersions.Text = "Reload";
+            this.btnReloadVersions.UseVisualStyleBackColor = true;
+            this.btnReloadVersions.Click += new System.EventHandler(this.btnReloadVersions_Click);
+            // 
+            // lbQbackupsContents
+            // 
+            this.lbQbackupsContents.FormattingEnabled = true;
+            this.lbQbackupsContents.Location = new System.Drawing.Point(351, 488);
+            this.lbQbackupsContents.Name = "lbQbackupsContents";
+            this.lbQbackupsContents.ScrollAlwaysVisible = true;
+            this.lbQbackupsContents.Size = new System.Drawing.Size(179, 199);
+            this.lbQbackupsContents.TabIndex = 85;
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(350, 693);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(57, 20);
+            this.button18.TabIndex = 86;
+            this.button18.Text = "Import";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(470, 693);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(60, 20);
+            this.button19.TabIndex = 87;
+            this.button19.Text = "Delete";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
             // MCworldMngr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1078, 769);
+            this.ClientSize = new System.Drawing.Size(1116, 769);
+            this.Controls.Add(this.button19);
+            this.Controls.Add(this.button18);
+            this.Controls.Add(this.lbQbackupsContents);
+            this.Controls.Add(this.btnReloadVersions);
             this.Controls.Add(this.cbVersionFilter);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.tbShearch);
@@ -635,6 +682,10 @@
         private System.Windows.Forms.TextBox tbShearch;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ComboBox cbVersionFilter;
+        private System.Windows.Forms.Button btnReloadVersions;
+        private System.Windows.Forms.ListBox lbQbackupsContents;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
     }
 }
 

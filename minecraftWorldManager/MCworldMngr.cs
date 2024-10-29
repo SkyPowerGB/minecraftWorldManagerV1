@@ -51,12 +51,14 @@ namespace minecraftWorldManager
 
         private void displayQbckpWorldsNames(string selectedQB)
         {
+        
+            lbQbackupsContents.Items.Clear();
             rTbDisplayWFdata.Clear();
             var dirs = Directory.GetDirectories(selectedQB);
             foreach (var dir in dirs)
             {
-                rTbDisplayWFdata.Text += Path.GetFileName(dir) + Environment.NewLine;
-                rTbDisplayWFdata.Text += Environment.NewLine;
+                lbQbackupsContents.Items.Add( Path.GetFileName(dir)); 
+            
             }
         }
 
@@ -142,11 +144,17 @@ namespace minecraftWorldManager
             if (lbMcWorlds.SelectedItem == null) { return null; }
             return Path.Combine(tbMcSavesLocPath.Text, lbMcWorlds.SelectedItem.ToString());
         }
-
         public string getSelectedBranchSavePath()
         {
             if (lbBranchContents.SelectedItem == null) { return null; }
             return Path.Combine(tbBranch.Text, lbBranchContents.SelectedItem.ToString());
+        }
+        public string getSelectedQbackupWorldPath() {
+            var qBackupPath = getSelectedQBackupPath();
+            if (lbQbackupsContents.SelectedItem == null) { return null; }
+            var selectedSave=lbQbackupsContents.SelectedItem.ToString();
+            if (selectedSave == null || qBackupPath == null) { return null; }
+            return Path.Combine(qBackupPath, selectedSave); 
         }
 
         // GET PATHS FOR FOLDERS
@@ -300,9 +308,6 @@ namespace minecraftWorldManager
 
 
         }
-       
-        
-        
         private void LoadQsaves()
         {
             lbQuickBackups.Items.Clear();
@@ -380,6 +385,7 @@ namespace minecraftWorldManager
             versionLists = getAllversions(tbMcSavesLocPath.Text,versionLists);
             versionLists = getAllversions(tbBackupsPath.Text, versionLists);
             cbVersionFilter.DataSource= versionLists;
+            cbVersionFilter.SelectedItem = "all";
         }
 
         private List<string> getAllversions(string worldsFolderPath,List<string> versions){
@@ -391,11 +397,20 @@ namespace minecraftWorldManager
 
             foreach ( var dir in worlds)
             {
-
-                var version = getWorldVersion(dir, versions);
-                if (!versions.Contains(version)) { 
-                versions.Add(version);
+                string version = "all";
+                 version = getWorldVersion(dir, versions);
+                Console.WriteLine("instert version"+version);
+                if (version != null) {
+                  
+                version=   version.Trim();
                 }
+          
+                if (true)
+                {
+                   
+                    versions.Add(version);
+                }
+                
             }
         
             return versions;
@@ -408,20 +423,23 @@ namespace minecraftWorldManager
             if (WorldDataFileWorker.IsBranch(worldPath)) { getAllversions(worldPath,versions);  return output; }
 
 
-            if (WorldDataFileWorker.IsMarked(worldPath))
-            {
-                var data = WorldDataFileWorker.GetWroldDF(worldPath);
-                output = data.worldVersion;
-
-            }
+         
 
 
             var model=MinecraftNBTfileManager.ReadMcNBTfile(worldPath);
             if (model != null)
             {
                 output = model.WorldVersion;
+                return output;
             }
-           
+            else if (WorldDataFileWorker.IsMarked(worldPath))
+            {
+                var data = WorldDataFileWorker.GetWroldDF(worldPath);
+                output = data.minecraftVersion;
+                return output;
+
+            }
+
 
             return output;
         }
@@ -946,6 +964,8 @@ namespace minecraftWorldManager
 
         private void lbQuickBackups_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
+
             if (!isQBackupSelected()) { return; }
             displayQbckpWorldsNames(getSelectedQBackupPath());
         }
@@ -1065,6 +1085,37 @@ namespace minecraftWorldManager
 
         private void cbVersionFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            refreshLists();
+        }
+
+        private void btnReloadVersions_Click(object sender, EventArgs e)
+        {
+            LoadAllVersionsCombo();
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+           var world=getSelectedQbackupWorldPath();
+            if (world == null) { showErrorMsg("q backup and its world must be selecet");  return; }
+            if (tbMcSavesLocPath.Text == null) { showErrorMsg("mc saves path not selected"); }
+            McFileMngr.CopyWorldTo(world,tbMcSavesLocPath.Text);
+            refreshLists();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            var world = getSelectedQbackupWorldPath();
+            if (world == null) { showErrorMsg("q backup and its world must be selecet"); return; }
+            if (tbMcSavesLocPath.Text == null) { showErrorMsg("mc saves path not selected"); }
+            McFileMngr.CutWorldToRnm(world, tbMcSavesLocPath.Text,null);
+            refreshLists();
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            var world = getSelectedQbackupWorldPath();
+            if (world == null) { showErrorMsg("q backup and its world must be selecet"); return; }
+            ConfirmDelete(world);
             refreshLists();
         }
     }
