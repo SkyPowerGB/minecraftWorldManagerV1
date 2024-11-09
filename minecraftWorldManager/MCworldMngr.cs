@@ -163,6 +163,7 @@ namespace minecraftWorldManager
 
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string minecraftSavesPath = Path.Combine(appDataPath, ".minecraft", "saves");
+            if (!Directory.Exists(minecraftSavesPath)) { return " "; }
 
             return minecraftSavesPath;
 
@@ -192,6 +193,7 @@ namespace minecraftWorldManager
         {
 
             string minecraftSavesPath = GetMcSavesFolder();
+            
 
             if (!Directory.Exists(minecraftSavesPath))
             {
@@ -199,8 +201,12 @@ namespace minecraftWorldManager
                 return;
 
             }
-            tbMcSavesLocPath.Text = minecraftSavesPath;
-
+            
+                tbMcSavesLocPath.Text = minecraftSavesPath;
+            
+            var data = ProgDataFileMngr.GetProgramData();
+            data.mcSavesPath = tbMcSavesLocPath.Text;
+            ProgDataFileMngr.UpdateProgData(data);
             var directories = Directory.GetDirectories(minecraftSavesPath);
             lbMcWorlds.Items.Clear();
 
@@ -399,7 +405,7 @@ namespace minecraftWorldManager
             {
                 string version = "all";
                  version = getWorldVersion(dir, versions);
-                Console.WriteLine("instert version"+version);
+               
                 if (version != null) {
                   
                 version=   version.Trim();
@@ -828,9 +834,16 @@ namespace minecraftWorldManager
             if (DialogResult.OK == result)
             {
                 tbMcSavesLocPath.Text = ofd.SelectedPath;
+
+                var data = ProgDataFileMngr.GetProgramData();
+                data.mcSavesPath = tbBackupsPath.Text;
+                ProgDataFileMngr.UpdateProgData(data);
+
                 LoadSaves(false);
                 return;
             }
+          
+
         }
 
         private void tbMcSavesLocPath_TextChanged(object sender, EventArgs e)
@@ -1117,6 +1130,15 @@ namespace minecraftWorldManager
             if (world == null) { showErrorMsg("q backup and its world must be selecet"); return; }
             ConfirmDelete(world);
             refreshLists();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            var data = QbckpFileMngr.GetQuickBckpData();
+            if (data == null) { return; }
+            Settings setting = new Settings(data);
+            setting.ShowDialog();
+       
         }
     }
 

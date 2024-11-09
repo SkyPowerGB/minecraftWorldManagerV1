@@ -238,7 +238,8 @@ namespace minecraftWorldManager
 
         }
 
-        public static void CopyAllSubdirsTo(string sourceDirPath , string destinationPath) {
+        public static void CopyAllSubdirsTo(string sourceDirPath , string destinationPath , bool overwrite) {
+            Console.WriteLine("copy all subdirs to from" + sourceDirPath +" to "+destinationPath);
                     if(sourceDirPath == null ) {
                 Console.WriteLine("copy failed source not found" );
                 return; }
@@ -252,12 +253,22 @@ namespace minecraftWorldManager
                 
                 if (!WorldDataFileWorker.IsBranch(dir))
                 {
-                    CopyWorldTo(dir, destinationPath, false);
+                    CopyWorldTo(dir, destinationPath, overwrite);
                 }
             
             }
 
         }
+
+
+        public static void CopyAllSubdirsTo(string sourceDirPath, string destinationPath) {
+            CopyAllSubdirsTo(sourceDirPath,destinationPath,false);
+
+
+        }
+
+
+
 
         private static List<DateTime> dates = new List<DateTime>();
        

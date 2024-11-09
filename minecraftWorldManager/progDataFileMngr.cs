@@ -15,7 +15,9 @@ namespace minecraftWorldManager
         public static ProgramDat GetProgramData() {
             if (!File.Exists(filePath))
             {
-                return null; 
+                if (!Directory.Exists(dataFolder)) { Directory.CreateDirectory(dataFolder); }
+
+                return new ProgramDat(); 
 
 
             }

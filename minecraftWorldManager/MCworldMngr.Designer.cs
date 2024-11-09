@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MCworldMngr));
             this.lbMcWorlds = new System.Windows.Forms.ListBox();
             this.lbBackups = new System.Windows.Forms.ListBox();
             this.btnLoadSaves = new System.Windows.Forms.Button();
@@ -78,6 +79,7 @@
             this.lbQbackupsContents = new System.Windows.Forms.ListBox();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbMcWorlds
@@ -571,11 +573,22 @@
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
+            // btnSettings
+            // 
+            this.btnSettings.Location = new System.Drawing.Point(950, 12);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(116, 40);
+            this.btnSettings.TabIndex = 88;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
             // MCworldMngr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1116, 769);
+            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.lbQbackupsContents);
@@ -626,6 +639,7 @@
             this.Controls.Add(this.btnLoadSaves);
             this.Controls.Add(this.lbBackups);
             this.Controls.Add(this.lbMcWorlds);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MCworldMngr";
             this.Text = "Minecraft world Manager";
             this.Load += new System.EventHandler(this.MCworldMngr_Load);
@@ -686,6 +700,7 @@
         private System.Windows.Forms.ListBox lbQbackupsContents;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 

@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace minecraftWorldManager
 {
-    internal class QuickBackupsDat
+    public class QuickBackupsDat
     {
-        public int numOfAutoQBCKP;
-        public int numTreshold;
+
+        public int numMinute;
+  
+        public int numHours;
+        public int numDays;
+        public DateTime lastBackup;
+        public string folderName = "auto";
     }
 }
