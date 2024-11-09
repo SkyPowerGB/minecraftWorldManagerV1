@@ -1135,7 +1135,7 @@ namespace minecraftWorldManager
         private void btnSettings_Click(object sender, EventArgs e)
         {
             var data = QbckpFileMngr.GetQuickBckpData();
-            if (data == null) { return; }
+            if (data == null) { data = new QuickBackupsDat(); }
             Settings setting = new Settings(data);
             setting.ShowDialog();
        
