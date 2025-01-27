@@ -8,6 +8,7 @@ namespace minecraftWorldManager
 {
     public class QuickBackupsDat
     {
+        public bool autoUpdate;
 
         public int numMinute;
   

@@ -11,46 +11,53 @@ namespace minecraftWorldManager
     {
         private string qBackupsFolderPath;
         private string mcWorldsPath;
-        public async Task BackupAsync(string qBackupsFolderPath,string mcWorldsPath) { 
-            this.qBackupsFolderPath = qBackupsFolderPath; 
-            this.mcWorldsPath= mcWorldsPath;
-
-            while (true)
+        public async Task BackupAsync(string qBackupsFolderPath, string mcWorldsPath)
+        {
+            this.qBackupsFolderPath = qBackupsFolderPath;
+            this.mcWorldsPath = mcWorldsPath;
+            var data = QbckpFileMngr.GetQuickBckpData();
+            if (data != null)
             {
-                var data = QbckpFileMngr.GetQuickBckpData();
-                if (data != null)
+                while (true)
                 {
-                    var time = DateTime.Now;
-                    var saveTimeB = data.lastBackup.AddDays(data.numDays).AddHours(data.numHours).AddMinutes(data.numMinute);
-                    
+
+
+                    Console.WriteLine("autobackuper ok");
+                   
+                        var time = DateTime.Now;
+                        var saveTimeB = data.lastBackup.AddDays(data.numDays).AddHours(data.numHours).AddMinutes(data.numMinute);
+
                         var dirPath = Path.Combine(qBackupsFolderPath, data.folderName);
-                    if (time >= saveTimeB)
-                    {
-                        if (!Directory.Exists(dirPath))
+                        if (time >= saveTimeB)
                         {
-                            Directory.CreateDirectory(dirPath);
+                            Console.WriteLine("Start backup-------------------------------");
+                            if (!Directory.Exists(dirPath))
+                            {
+                                Directory.CreateDirectory(dirPath);
+
+                            }
+                            Console.WriteLine("backup" + mcWorldsPath);
+                            McFileMngr.CopyAllSubdirsTo(mcWorldsPath, dirPath, true);
+
+                            data.lastBackup = DateTime.Now;
+                            QbckpFileMngr.UpdateQbckpData(data);
 
                         }
-                        Console.WriteLine("backup" + mcWorldsPath);
-                        McFileMngr.CopyAllSubdirsTo(mcWorldsPath, dirPath, true);
 
-                        data.lastBackup = DateTime.Now;
-                        QbckpFileMngr.UpdateQbckpData(data);
-
-                    }
                     
+                    await Task.Delay(60000);
                 }
-
-
-
-                await Task.Delay(60000);
             }
 
 
-
-
-      
-        
+           
         }
+
+
+
+
+
+
     }
 }
+

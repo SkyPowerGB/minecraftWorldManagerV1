@@ -11,12 +11,7 @@ namespace minecraftWorldManager
     internal static class Program
     {
         private static NotifyIcon trayIcon;
-        /// <summary>
-        /// The main entry point for the application.
-        /// 
-        ///
-        /// </summary>
-        /// 
+     
         [STAThread]
         static void Main()
         {
@@ -40,15 +35,7 @@ namespace minecraftWorldManager
 
             }
 
-
-
-            Application.SetCompatibleTextRenderingDefault(false);
-
-          
-           
-
-            Application.Run(new MCworldMngr());
-            AutoBackuper backuper= new AutoBackuper();  
+            AutoBackuper backuper = new AutoBackuper();
 
             var data = ProgDataFileMngr.GetProgramData();
             if (data != null)
@@ -60,6 +47,16 @@ namespace minecraftWorldManager
 
                 }
             }
+
+
+
+            Application.SetCompatibleTextRenderingDefault(false);
+
+          
+           
+
+            Application.Run(new MCworldMngr());
+       
 
         }
 
